@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FishBud</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="term">I Agree to the <b><u>Terms of Service</u></b> and <b><u>Privacy Policy</u></b></string>
+    <string name="loginText"><b><u>Login</u></b></string>
+    <string name="registerText"><b><u>Register now</u></b></string>
+
+</resources>
