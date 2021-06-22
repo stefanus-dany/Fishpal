@@ -11,10 +11,10 @@
         android:theme="@style/Theme.FishBud">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="fullSensor"/>
         <activity
-            android:name="com.project.fishbud.ui.authentication.Authentication"
-            android:screenOrientation="portrait">
+            android:name="com.project.fishbud.ui.authentication.AuthenticationActivity"
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

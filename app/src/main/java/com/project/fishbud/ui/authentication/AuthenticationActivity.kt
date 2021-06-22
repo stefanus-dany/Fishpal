@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.project.fishbud.R
 import com.project.fishbud.databinding.ActivityAuthenticationBinding
 
-class Authentication : AppCompatActivity() {
+class AuthenticationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAuthenticationBinding
 
@@ -14,7 +14,7 @@ class Authentication : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val loginFrag = Login()
+        val loginFrag = LoginFragment()
         makeCurrentFragment(loginFrag)
 
     }

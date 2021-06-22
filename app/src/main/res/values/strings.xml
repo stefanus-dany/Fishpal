@@ -3,7 +3,22 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="term">I Agree to the <b><u>Terms of Service</u></b> and <b><u>Privacy Policy</u></b></string>
+    <string name="agreeTerm">Please Agree to the <b><u>Terms of Service</u></b> and <b><u>Privacy Policy</u></b></string>
     <string name="loginText"><b><u>Login</u></b></string>
     <string name="registerText"><b><u>Register now</u></b></string>
+    <string name="create_new_naccount">Create New\nAccount</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="verification_email_notif">Verification email has been sent to geegs@gmail.com</string>
+    <string name="resend_code">Resend code in</string>
+    <string name="one_minutes">1:00</string>
+    <string name="resend_code_button">Resend Code</string>
+    <string name="login">Login</string>
+    <string name="verification_email_has_been_sent">Verification has been sent to your email</string>
+    <string name="welcome_nback">Welcome\nBack</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="logout">Logout</string>
 
 </resources>
