@@ -45,20 +45,17 @@ class LoginFragment : Fragment(), View.OnClickListener {
             Context.MODE_PRIVATE
         ) as SharedPreferences
         val emailSaved = sharedPreferences.getString(Companion.CHECK_EMAIL, null)
-        val passwordSaved = sharedPreferences.getString(Companion.CHECK_PASSWORD, null)
         val rememberMe = sharedPreferences.getBoolean(Companion.REMEMBER_ME, false)
 //        moveFromVerifiedEmailToLogin =
 //            intent.getBooleanExtra(Companion.MOVE_FROM_VERIFIED_EMAIL_TO_LOGIN, false)
 
-        if (rememberMe && emailSaved != null && passwordSaved != null) {
+        if (rememberMe && emailSaved != null) {
             binding.etEmail.setText(emailSaved)
-            binding.etPassword.setText(passwordSaved)
         }
 
         binding.rememberMe.isChecked = rememberMe
         binding.loginBtn.setOnClickListener(this)
         binding.registerNow.setOnClickListener(this)
-
 
     }
 
@@ -136,7 +133,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
                         verifiedEmail.arguments = mBundle
 
                         fragmentManager?.beginTransaction()?.apply {
-                            replace(R.id.fl_wrapper, verifiedEmail, VerifiedEmailFragment::class.java.simpleName)
+                            replace(
+                                R.id.fl_wrapper,
+                                verifiedEmail,
+                                VerifiedEmailFragment::class.java.simpleName
+                            )
                             commit()
                         }
                     }
@@ -152,30 +153,30 @@ class LoginFragment : Fragment(), View.OnClickListener {
             }
     }
 
-    //    override fun onStart() {
-//        super.onStart()
-//        if (auth.currentUser != null && !moveFromVerifiedEmailToLogin) {
-//            updateUI(auth.currentUser)
-//        }
-//    }
-//
-    private fun updateUI(currentUser: FirebaseUser?) {
-        if (currentUser != null) {
-            startActivity(Intent(context, MainActivity::class.java))
-            activity?.finish()
+    override fun onStart() {
+        super.onStart()
+        if (auth.currentUser != null && !moveFromVerifiedEmailToLogin) {
+            updateUI(auth.currentUser)
         }
     }
 
-    //
+    private fun updateUI(currentUser: FirebaseUser?) {
+
+        if (currentUser != null) {
+            if (currentUser.isEmailVerified){
+                startActivity(Intent(context, MainActivity::class.java))
+                activity?.finish()
+            }
+        }
+    }
+
     override fun onPause() {
         super.onPause()
         val editor = sharedPreferences.edit()
         if (binding.rememberMe.isChecked) {
             editor.putString(Companion.CHECK_EMAIL, binding.etEmail.text.toString())
-            editor.putString(Companion.CHECK_PASSWORD, binding.etPassword.text.toString())
             editor.putBoolean(Companion.REMEMBER_ME, true)
             editor.apply()
         } else editor.clear().commit()
     }
-//
 }

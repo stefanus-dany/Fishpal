@@ -16,7 +16,7 @@ import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentVerifiedEmailBinding
 import java.util.concurrent.Executors
 
-class VerifiedEmailFragment : Fragment() {
+class VerifiedEmailFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding : FragmentVerifiedEmailBinding
     private lateinit var user: FirebaseUser
@@ -45,38 +45,42 @@ class VerifiedEmailFragment : Fragment() {
             binding.btnResendCode.visibility = View.VISIBLE
         } else startTimer()
         binding.email.text = resources.getString(R.string.verification_email_has_been_sent)
+        binding.btnGoToLogin.setOnClickListener(this)
+        binding.btnResendCode.setOnClickListener(this)
+    }
 
-        binding.btnGoToLogin.setOnClickListener {
-            fragmentManager?.beginTransaction()?.apply {
-                replace(R.id.fl_wrapper, LoginFragment())
-                commit()
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.btnGoToLogin -> {
+                fragmentManager?.beginTransaction()?.apply {
+                    replace(R.id.fl_wrapper, LoginFragment())
+                    commit()
+                }
+            }
+            R.id.btnResendCode -> {
+                Log.i(Companion.TAG, "userVerified: ${user.isEmailVerified}")
+
+                user.sendEmailVerification().addOnSuccessListener {
+                    binding.textTimer.visibility = View.VISIBLE
+                    binding.timer.visibility = View.VISIBLE
+                    binding.btnResendCode.visibility = View.GONE
+                    Toast.makeText(
+                        context,
+                        "Resend verification email has been sent.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    startTimer()
+
+                }.addOnFailureListener {
+                    Toast.makeText(
+                        context,
+                        "Resend verification failed. Please try again later",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.d(Companion.TAG, "onFailure: Resend email not sent " + it.message)
+                }
             }
         }
-
-        binding.btnResendCode.setOnClickListener {
-            Log.i(Companion.TAG, "userVerified: ${user.isEmailVerified}")
-
-            user.sendEmailVerification().addOnSuccessListener {
-                binding.textTimer.visibility = View.VISIBLE
-                binding.timer.visibility = View.VISIBLE
-                binding.btnResendCode.visibility = View.GONE
-                Toast.makeText(
-                    context,
-                    "Resend verification email has been sent.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                startTimer()
-
-            }.addOnFailureListener {
-                Toast.makeText(
-                    context,
-                    "Resend verification failed. Please try again later",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.d(Companion.TAG, "onFailure: Resend email not sent " + it.message)
-            }
-        }
-
     }
 
     private fun startTimer() {
@@ -106,8 +110,6 @@ class VerifiedEmailFragment : Fragment() {
                 binding.timer.visibility = View.GONE
                 binding.btnResendCode.visibility = View.VISIBLE
             }
-
         }
     }
-
 }
