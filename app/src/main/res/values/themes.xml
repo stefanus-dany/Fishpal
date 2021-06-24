@@ -13,4 +13,24 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="formatFont">
+        <item name="fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/font</item>
+    </style>
+
+    <style name="formatFont.semibold" parent="formatFont">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="formatFont.bold" parent="formatFont">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="searchView">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
 </resources>

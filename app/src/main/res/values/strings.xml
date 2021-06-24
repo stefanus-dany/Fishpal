@@ -21,8 +21,11 @@
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="logout">Logout</string>
     <string name="home">Home</string>
+    <string name="akun_pembeli">Akun Pembeli</string>
+    <string name="akun_toko">Akun Toko</string>
     <string name="marketplace">Marketplace</string>
     <string name="community">Community</string>
     <string name="profile">Profile</string>
+    <string name="you_re_in_jakarta">You\'re in <b>Jakarta</b></string>
 
 </resources>

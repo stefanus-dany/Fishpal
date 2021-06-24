@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FishBud">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main_ui.MainActivity"
             android:screenOrientation="fullSensor"/>
         <activity
             android:name="com.project.fishbud.ui.authentication.AuthenticationActivity"

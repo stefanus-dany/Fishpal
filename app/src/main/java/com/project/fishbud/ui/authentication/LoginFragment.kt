@@ -17,7 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.project.fishbud.Companion
-import com.project.fishbud.MainActivity
+import com.project.fishbud.ui.main_ui.MainActivity
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentLoginBinding
 
