@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             true
         }
 
-
         binding.btnLogout.setOnClickListener(this)
+        binding.detection.setOnClickListener(this)
 
     }
 
@@ -62,6 +62,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 auth.signOut()
                 startActivity(Intent(this, AuthenticationActivity::class.java))
                 finish()
+            }
+
+            R.id.detection -> {
+
             }
         }
     }

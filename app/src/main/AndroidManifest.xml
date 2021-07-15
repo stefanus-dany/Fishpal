@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.fishbud">
+    <!-- custom camera -->
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -9,12 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FishBud">
+        <activity android:name=".ui.recognition.InfoScanActivity"></activity>
+        <activity android:name=".ui.authentication.AuthenticationActivity" />
         <activity
             android:name=".ui.main_ui.MainActivity"
-            android:screenOrientation="fullSensor"/>
+            android:screenOrientation="fullSensor" />
         <activity
-            android:name="com.project.fishbud.ui.authentication.AuthenticationActivity"
-            android:screenOrientation="fullSensor">
+            android:name=".ui.recognition.RecognitionActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

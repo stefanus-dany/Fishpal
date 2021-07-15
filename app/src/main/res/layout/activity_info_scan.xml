@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.recognition.InfoScanActivity">
+
+    <ImageView
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/bg_home_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="5dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/btn_back"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        style="@style/formatFont.semibold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/main_margin"
+                        android:text="@string/info_scan"
+                        android:textSize="@dimen/main_fontSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_infoscan"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginHorizontal="@dimen/indent_margin"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_rounded_corner"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/indent_margin">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bg_infoscan"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_harga"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/title_infoscan"
+                        style="@style/formatFont.bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/indent_margin"
+                        android:gravity="center"
+                        android:text="Gurame"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/size_max"
+                        style="@style/formatFont.bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/indent_margin"
+                        android:gravity="center"
+                        android:text="35 cm"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toStartOf="@+id/age"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title_infoscan" />
+
+                    <TextView
+                        android:id="@+id/age"
+                        style="@style/formatFont.bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/indent_margin"
+                        android:gravity="center"
+                        android:text="5 bulan"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/size_max"
+                        app:layout_constraintTop_toBottomOf="@id/title_infoscan" />
+
+                    <TextView
+                        android:id="@+id/tv_size_max"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center"
+                        android:text="@string/ukuran_maksimum"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toStartOf="@+id/age"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/size_max" />
+
+                    <TextView
+                        android:id="@+id/tv_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center"
+                        android:text="@string/perkiraan_nusia"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.514"
+                        app:layout_constraintStart_toEndOf="@+id/size_max"
+                        app:layout_constraintTop_toBottomOf="@id/age" />
+
+                    <TextView
+                        android:id="@+id/kandungan_nutrisi"
+                        style="@style/formatFont.bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/indent_margin"
+                        android:gravity="center"
+                        android:text="Kandungan Nutrisi"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_size_max" />
+
+                    <TextView
+                        android:id="@+id/tv_kandungan_nutrisi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center"
+                        android:text="Kalori, Protein, Karbohidrat, Sodium, Kolesterol, Lemak, Kalsium, Zat besi, Potasium, Vitamin A, Vitamin C"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/kandungan_nutrisi" />
+
+
+                    <TextView
+                        android:id="@+id/harga"
+                        style="@style/formatFont.bold"
+                        android:layout_width="79dp"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="@dimen/indent_margin"
+                        android:gravity="center"
+                        android:text="Harga"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_kandungan_nutrisi" />
+
+                    <TextView
+                        android:id="@+id/tv_harga"
+                        style="@style/formatFont.bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/money"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center"
+                        android:text="Rp50.000 - 60.000/kg"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/harga" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/indent_margin"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_field_button"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Cari di Toko"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
