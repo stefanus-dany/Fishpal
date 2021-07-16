@@ -14,13 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FishBud">
-        <activity android:name=".ui.recognition.InfoScanActivity"></activity>
-        <activity android:name=".ui.authentication.AuthenticationActivity" />
-        <activity
-            android:name=".ui.main_ui.MainActivity"
-            android:screenOrientation="fullSensor" />
+        <activity android:name=".ui.recognition.InfoScanActivity" />
+        <activity android:name=".ui.main_ui.MainActivity" />
         <activity
             android:name=".ui.recognition.RecognitionActivity"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".ui.authentication.AuthenticationActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

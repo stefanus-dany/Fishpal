@@ -3,20 +3,25 @@ package com.project.fishbud.ui.main_ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.project.fishbud.R
 import com.project.fishbud.databinding.ActivityMainBinding
 import com.project.fishbud.ui.authentication.AuthenticationActivity
+import com.project.fishbud.ui.main_ui.marketplace.MarketplaceFragment
+import com.project.fishbud.ui.main_ui.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding : ActivityMainBinding
     private lateinit var auth : FirebaseAuth
+    private val TAG = "check"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "onCreate: ")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.bottomNavigationView.background = null
@@ -75,5 +80,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             replace(R.id.fl_main_ui, fragment)
             commit()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause: ")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i(TAG, "onStart: ")
     }
 }

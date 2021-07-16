@@ -30,5 +30,9 @@
     <string name="ukuran_maksimum">Ukuran\nmaksimum</string>
     <string name="perkiraan_nusia">Perkiraan\nusia</string>
     <string name="info_scan">Info Scan</string>
+    <string name="toko">Toko</string>
+    <string name="tambah_produk">Tambah Produk</string>
+    <string name="harga_kg_rupiah">Harga/kg (rupiah)</string>
+    <string name="nama_ikan">Nama Ikan</string>
 
 </resources>
