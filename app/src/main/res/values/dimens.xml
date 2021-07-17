@@ -3,4 +3,6 @@
     <dimen name="main_margin">10dp</dimen>
     <dimen name="indent_margin">30dp</dimen>
     <dimen name="main_fontSize">18sp</dimen>
+    <dimen name="bottomFab">60dp</dimen>
+    <dimen name="bottomFabIndent">80dp</dimen>
 </resources>

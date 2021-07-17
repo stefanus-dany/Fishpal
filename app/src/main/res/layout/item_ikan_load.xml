@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue_bright">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/iv_gambarIkan"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_ikan"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@android:color/darker_gray"
+                    android:scaleType="fitXY" />
+            </androidx.cardview.widget.CardView>
+
+
+            <View
+                android:id="@+id/nama_ikan"
+                style="@style/formatFont.bold"
+                android:layout_width="110dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="@dimen/main_margin"
+                android:background="@android:color/darker_gray"
+                android:text="@string/nama_ikan"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_gambarIkan"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/harga_ikan"
+                style="@style/formatFont.semibold"
+                android:layout_width="110dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="@dimen/main_margin"
+                android:background="@android:color/darker_gray"
+                android:text="@string/harga_ikan"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_gambarIkan"
+                app:layout_constraintTop_toBottomOf="@id/nama_ikan" />
+
+            <View
+                android:id="@+id/toko_ikan"
+                style="@style/formatFont"
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="@dimen/main_margin"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/darker_gray"
+                android:text="@string/nama_toko"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_gambarIkan" />
+
+            <ImageView
+                android:id="@+id/addToCart"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="@dimen/main_margin"
+                android:layout_marginBottom="@dimen/main_margin"
+                android:background="@android:color/darker_gray"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/toko_ikan" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

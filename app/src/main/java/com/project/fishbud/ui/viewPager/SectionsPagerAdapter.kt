@@ -17,7 +17,7 @@ class SectionsPagerAdapter(private val mContext: Context, fm: FragmentManager) :
     override fun getItem(position: Int): Fragment =
         when (position) {
             0 -> AkunPembeliFragment()
-            1 -> AkunToko()
+            1 -> AkunTokoFragment()
             else -> Fragment()
         }
 

@@ -39,6 +39,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
+                    android:id="@+id/cart"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/keranjang_marketplace"
@@ -52,6 +53,7 @@
 
 
     <ImageView
+        android:id="@+id/imageView6"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -74,160 +76,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar" />
 
-    <ScrollView
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_marginHorizontal="@dimen/indent_margin"
+        android:layout_marginTop="@dimen/main_margin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/searchMarketplace">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_ikan_load" />
+
+            <include layout="@layout/item_ikan_load" />
+
+            <include layout="@layout/item_ikan_load" />
+
+            <include layout="@layout/item_ikan_load" />
+
+            <include layout="@layout/item_ikan_load" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_marketplace"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/indent_margin"
+        android:layout_marginTop="@dimen/main_margin"
+        android:paddingBottom="@dimen/bottomFab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchMarketplace">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_kategori"
-                style="@style/formatFont.bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:text="Kategori"
-                android:textSize="@dimen/main_fontSize"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/toko_home"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_kategori">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_ikanLaut"
-                    android:layout_width="150dp"
-                    android:layout_height="200dp"
-                    android:backgroundTint="#E2ECF6"
-                    app:cardCornerRadius="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/cv_ikanTawar"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <ImageView
-                            android:id="@+id/ikanLaut"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:src="@drawable/ikan_laut"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            style="@style/formatFont.bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Ikan Laut"
-                            app:layout_constraintEnd_toEndOf="@+id/ikanLaut"
-                            app:layout_constraintStart_toStartOf="@+id/ikanLaut"
-                            app:layout_constraintTop_toBottomOf="@id/ikanLaut" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_ikanTawar"
-                    android:layout_width="150dp"
-                    android:layout_height="200dp"
-                    android:backgroundTint="#E2ECF6"
-                    app:cardCornerRadius="15dp"
-                    app:layout_constraintStart_toEndOf="@id/cv_ikanLaut"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintEnd_toEndOf="@+id/cv_ikanLaut"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/constraintLayout2">
-
-                        <ImageView
-                            android:id="@+id/ikanTawar"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:src="@drawable/ikan_tawar"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            style="@style/formatFont.bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Ikan Tawar"
-                            app:layout_constraintEnd_toEndOf="@+id/ikanTawar"
-                            app:layout_constraintStart_toStartOf="@+id/ikanTawar"
-                            app:layout_constraintTop_toBottomOf="@id/ikanTawar" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/tv_ikan"
-                style="@style/formatFont.bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:text="Ikan"
-                android:textSize="@dimen/main_fontSize"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toko_home" />
-
-            <TextView
-                style="@style/formatFont"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:text="Lihat semua"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_ikan"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_ikan" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_komunitas_home"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginHorizontal="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_ikan" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@id/searchMarketplace" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

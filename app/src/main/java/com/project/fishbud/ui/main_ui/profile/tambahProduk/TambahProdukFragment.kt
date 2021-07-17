@@ -3,7 +3,6 @@ package com.project.fishbud.ui.main_ui.profile.tambahProduk
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentTambahProdukBinding
-import com.project.fishbud.model.UserModel
+import com.project.fishbud.ui.main_ui.MainActivity
 
 class TambahProdukFragment : Fragment(), View.OnClickListener {
 
@@ -69,13 +68,20 @@ class TambahProdukFragment : Fragment(), View.OnClickListener {
                     return onClick(view)
                 }
 
+                if (binding.etHargaIkan.text.toString().trim().toInt() > Int.MAX_VALUE) {
+                    binding.etHargaIkan.error = "Harga terlalu besar!"
+                    binding.etHargaIkan.requestFocus()
+                    binding.progressBar.visibility = View.INVISIBLE
+                    return onClick(view)
+                }
+
                 if (uriImage==null){
                     Toast.makeText(context, "Masukkan foto ikan!", Toast.LENGTH_SHORT).show()
                     binding.progressBar.visibility = View.INVISIBLE
                     return onClick(view)
                 }
 
-                viewModel.getDataUser().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                viewModel.getDataUser().observe(viewLifecycleOwner, {
                     namaUser = it[0].name
 
                     //store data to database

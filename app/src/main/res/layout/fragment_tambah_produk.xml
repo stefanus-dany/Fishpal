@@ -32,7 +32,8 @@
                     android:layout_height="35dp"
                     android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     style="@style/formatFont.semibold"
@@ -115,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:hint="@string/harga_kg_rupiah"
+                android:maxLength="10"
                 android:inputType="number"
                 android:textColor="@color/black"
                 android:textSize="16sp" />

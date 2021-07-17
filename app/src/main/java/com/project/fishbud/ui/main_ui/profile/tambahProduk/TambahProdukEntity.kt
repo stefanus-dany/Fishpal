@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TambahProdukEntity(
     var idProduk : String = "",
-    var namaiKan : String = "",
+    var namaIkan : String = "",
     var harga : Int = 0,
     var tokoIkan : String = "",
     var linkImage : String = ""

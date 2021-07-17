@@ -14,4 +14,8 @@
     <color name="tosca_900">#002B5C</color>
     <color name="bottomNav">#E2ECF6</color>
     <color name="font">#204553</color>
+    <color name="placeholder">#6FB6B6B6</color>
+    <color name="blue_bright">#DEEAF5</color>
+    <color name="cart">#0BCE83</color>
+    <color name="cart_click">#72EDBE</color>
 </resources>

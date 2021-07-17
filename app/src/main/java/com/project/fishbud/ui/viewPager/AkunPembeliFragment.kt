@@ -32,7 +32,7 @@ class AkunPembeliFragment : Fragment() {
 
     private fun makeCurrentFragment(fragment: Fragment) {
         fragmentManager?.beginTransaction()?.apply {
-            add(R.id.fl_main_ui, fragment)
+            replace(R.id.fl_main_ui, fragment)
             addToBackStack(null)
             commit()
         }

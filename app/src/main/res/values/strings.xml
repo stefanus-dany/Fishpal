@@ -34,5 +34,14 @@
     <string name="tambah_produk">Tambah Produk</string>
     <string name="harga_kg_rupiah">Harga/kg (rupiah)</string>
     <string name="nama_ikan">Nama Ikan</string>
+    <string name="harga_ikan">Rp0</string>
+    <string name="nama_toko">Nama Toko</string>
+    <string name="keranjang_saya">Keranjang Saya</string>
+    <string name="beli_sekarang">Beli Sekarang</string>
+    <string name="_0">0</string>
+    <string name="total">Total</string>
+    <string name="rp0">Rp0</string>
+
+    //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 
 </resources>

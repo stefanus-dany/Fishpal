@@ -23,12 +23,16 @@ class TambahProdukViewModel : ViewModel() {
     @SuppressLint("StaticFieldLeak")
     lateinit var mContext : Context
     //implementasi alfabet acak untuk id
-    val alphabet: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-    val idProduk = List(20) { alphabet.random() }.joinToString("")
+    private lateinit var alphabet: List<Char>
+    private lateinit var idProduk: String
 
     fun uploadPicture(namaUser : String, namaIkan : String, hargaIkan : Int, imageURI : Uri) {
         storage = FirebaseStorage.getInstance()
         storageReference = storage.reference
+
+        alphabet = emptyList()
+        alphabet = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+        idProduk = List(20) { alphabet.random() }.joinToString("")
 
         val tmp: StorageReference =
             storageReference.child("TambahProduk/$idProduk.jpg")
@@ -53,7 +57,7 @@ class TambahProdukViewModel : ViewModel() {
         return mutableData
     }
 
-    fun storeToDatabase(namaUser : String, namaIkan : String, hargaIkan : Int, urlImage : String){
+    private fun storeToDatabase(namaUser : String, namaIkan : String, hargaIkan : Int, urlImage : String){
         val reference = FirebaseDatabase.getInstance().reference.child("ListProduk").child(idProduk)
         Log.i("cek_cek", "storeToDatabase: $urlImage")
         val value = TambahProdukEntity(
