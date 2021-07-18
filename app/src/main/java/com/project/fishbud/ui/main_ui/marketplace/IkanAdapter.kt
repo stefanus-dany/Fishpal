@@ -52,8 +52,6 @@ class IkanAdapter(mContext: Context, onItemClick: OnItemClick) : RecyclerView.Ad
         fun bind(data: IkanEntity) {
             with(binding) {
                 namaIkan.text = data.namaIkan
-//                hargaIkan.text =
-//                    itemView.resources.getString(R.string.harga_ikan, data.harga.toString())
                 hargaIkan.text = formatRupiah(data.harga)
                 tokoIkan.text = data.tokoIkan
                 Glide.with(itemView.context)

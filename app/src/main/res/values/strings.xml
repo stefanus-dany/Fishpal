@@ -41,6 +41,16 @@
     <string name="_0">0</string>
     <string name="total">Total</string>
     <string name="rp0">Rp0</string>
+    <string name="pembayaran">Pembayaran</string>
+    <string name="alamat_pengiriman">Alamat Pengiriman</string>
+    <string name="no_kartu_kredit">No. Kartu Kredit</string>
+    <string name="jenis_pengiriman">Jenis Pengiriman</string>
+    <string name="one_day_service">One Day Service</string>
+    <string name="rp22_000">Rp22.000</string>
+    <string name="rp35_000">Rp35.000</string>
+    <string name="proses">Proses</string>
+    <string name="biaya_keranjang">Biaya Keranjang</string>
+    <string name="biaya_pengiriman">Biaya Pengiriman</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 

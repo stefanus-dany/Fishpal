@@ -26,6 +26,7 @@ class CartAdapter(private var mCallback: CartHarga) : RecyclerView.Adapter<CartA
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         val itemCartBinding =
             ItemCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return CourseViewHolder(itemCartBinding, parent.context, mCallback)
     }
 
