@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -18,9 +17,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.project.fishbud.Companion
-import com.project.fishbud.ui.main_ui.MainActivity
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentLoginBinding
+import com.project.fishbud.ui.main_ui.MainActivity
+
 
 class LoginFragment : Fragment(), View.OnClickListener {
 
@@ -164,7 +164,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private fun updateUI(currentUser: FirebaseUser?) {
 
         if (currentUser != null) {
-            if (currentUser.isEmailVerified){
+            if (currentUser.isEmailVerified) {
                 startActivity(Intent(context, MainActivity::class.java))
                 activity?.finish()
             }

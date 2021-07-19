@@ -1,14 +1,18 @@
 package com.project.fishbud.ui.main_ui.marketplace.checkout
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.project.fishbud.Constants
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentPaymentBinding
+import com.project.fishbud.ui.main_ui.profile.tambahProduk.TambahProdukViewModel
+import java.text.DateFormat
 import java.text.NumberFormat
 import java.util.*
 
@@ -19,6 +23,10 @@ class PaymentFragment : Fragment(), View.OnClickListener {
     private var deliveryPrice: Long = 0
     private var totalPrice: Long = 0
     private var isChecked = false
+    private lateinit var viewModel : PaymentViewModel
+    private var timeDate = ""
+    private var jenisPengiriman = ""
+    private var count = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +38,17 @@ class PaymentFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[PaymentViewModel::class.java]
+//        viewModel = ViewModelProvider(this)[PaymentViewModel::class.java]
+        viewModel.mContext = requireContext()
+
+        //get current date and time
+        val calendar = Calendar.getInstance().time
+        timeDate = DateFormat.getDateTimeInstance().format(calendar)
+
         val bundle: Bundle? = arguments
         if (bundle != null) {
             cartPrice = bundle.getLong(Constants.CART_PRICE_TO_PAYMENT, 0L)
@@ -45,6 +64,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                 binding.deliveryPrice.text = formatRupiah(deliveryPrice)
                 binding.hargaTotal.text = formatRupiah((totalPrice))
                 isChecked = true
+                jenisPengiriman = "ABC Regular"
             }
 
             if (checkedId == R.id.rb_2) {
@@ -53,6 +73,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                 binding.deliveryPrice.text = formatRupiah(deliveryPrice)
                 binding.hargaTotal.text = formatRupiah((totalPrice))
                 isChecked = true
+                jenisPengiriman = "One Day Service"
             }
         }
 
@@ -96,7 +117,30 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                     return onClick(view)
                 }
 
-                Toast.makeText(context, "Dah komplit", Toast.LENGTH_SHORT).show()
+                var buyerName = ""
+                var buyerId = ""
+
+                viewModel.getDataUser().observe(viewLifecycleOwner, {
+                    count++
+                    Log.i("cek_count", "cek count: $count")
+                    buyerName = it[0].name
+                    buyerId = it[0].id
+                    //store data to database
+                    viewModel.storeToDatabase(
+                        buyerName,
+                        buyerId,
+                        binding.etAddress.text.toString().trim(),
+                        binding.etPayment.text.toString().trim(),
+                        jenisPengiriman,
+                        totalPrice,
+                        timeDate
+                    )
+
+                })
+
+
+
+
 
                 binding.progressBar.visibility = View.GONE
             }

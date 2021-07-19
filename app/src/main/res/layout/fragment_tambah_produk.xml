@@ -123,15 +123,6 @@
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="getUrl"
-        android:id="@+id/getUrlBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_tambahProduk"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
@@ -148,7 +139,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/indent_margin"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/bottomFabIndent"
         android:background="@drawable/bg_field_button"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/tambah_produk"

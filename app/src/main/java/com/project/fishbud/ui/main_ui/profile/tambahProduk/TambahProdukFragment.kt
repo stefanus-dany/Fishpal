@@ -3,6 +3,7 @@ package com.project.fishbud.ui.main_ui.profile.tambahProduk
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentTambahProdukBinding
-import com.project.fishbud.ui.main_ui.MainActivity
 
 class TambahProdukFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentTambahProdukBinding
     private lateinit var viewModel: TambahProdukViewModel
     private var namaUser: String = ""
-    private var uriImage : Uri? = null
+    private var userId: String = ""
+    private var uriImage: Uri? = null
+    private var count = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,21 +77,25 @@ class TambahProdukFragment : Fragment(), View.OnClickListener {
                     return onClick(view)
                 }
 
-                if (uriImage==null){
+                if (uriImage == null) {
                     Toast.makeText(context, "Masukkan foto ikan!", Toast.LENGTH_SHORT).show()
                     binding.progressBar.visibility = View.INVISIBLE
                     return onClick(view)
                 }
 
                 viewModel.getDataUser().observe(viewLifecycleOwner, {
+                    count++
+                    Log.i("cek_count", "count tambahprodukfragment: $count")
                     namaUser = it[0].name
+                    userId = it[0].id
 
                     //store data to database
                     viewModel.uploadPicture(
                         namaUser,
                         binding.etNamaIkan.text.toString().trim(),
                         binding.etHargaIkan.text.toString().trim().toInt(),
-                        uriImage!!
+                        uriImage!!,
+                        userId
                     )
                 })
 
