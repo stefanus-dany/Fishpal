@@ -291,6 +291,89 @@ object DataFirebase {
         return mutableData
     }
 
+    fun getIdShipping(): LiveData<MutableList<String>> {
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser as FirebaseUser
+//        Log.i("cek_error", "masuk getDataUser: ")
+        val mutableData = MutableLiveData<MutableList<String>>()
+        val data = mutableListOf<String>()
+
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            // Simulate process in background thread
+            try {
+                val reference = FirebaseDatabase.getInstance().reference.child("Users")
+                    .child(user.uid)
+                    .child("shipping")
+                Log.i("cek_data", "user.uid: ${user.uid}")
+                reference.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        data.clear()
+                        for (dataSnapshot: DataSnapshot in snapshot.children) {
+                            val value = dataSnapshot.key.toString()
+                            Log.i("cekit", "cek value : $value")
+                            data.add(value)
+                        }
+                        mutableData.value = data
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+                Log.i("cek_data", "getDataUser: $data")
+
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            handler.post {
+                // Update ui in main thread
+                bgthread = Thread()
+                bgthread?.start()
+            }
+        }
+
+        return mutableData
+    }
+
+    fun getItemShipping(idOrdered: List<String>): LiveData<MutableList<OrderFishermanEntity>> {
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser as FirebaseUser
+        Log.i("cekit", "cek id di database : $idOrdered")
+//        Log.i("cek_error", "masuk getDataUser: ")
+        val mutableData = MutableLiveData<MutableList<OrderFishermanEntity>>()
+        val data = mutableListOf<OrderFishermanEntity>()
+
+        for (i in 0 until (idOrdered.size)) {
+            val reference = FirebaseDatabase.getInstance().reference.child("Users")
+                .child(user.uid)
+                .child("shipping")
+                .child(idOrdered[i])
+            Log.i("cek_data", "user.uid: ${user.uid}")
+            reference.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (dataSnapshot: DataSnapshot in snapshot.children) {
+                        val value = dataSnapshot.getValue(OrderFishermanEntity::class.java)
+//                        Log.i("cekit", "cek value di database : $value")
+                        if (value != null) {
+                            data.add(value)
+                            Log.i("cekit", "data di dalam value : $data")
+                        }
+                    }
+                    Log.i("cekit", "data setelah for : $data")
+                    mutableData.value = data
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+        }
+        Log.i("cekit", "cek nilai data di akhir method : $data")
+
+        return mutableData
+    }
+
+
 //    fun getIdOrderedFromFisherman(idOrdered: List<String>): LiveData<MutableList<String>> {
 //        auth = FirebaseAuth.getInstance()
 //        user = auth.currentUser as FirebaseUser

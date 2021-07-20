@@ -1,10 +1,10 @@
-package com.project.fishbud.ui.main_ui.profile.buyer
+package com.project.fishbud.ui.main_ui.profile.buyer.transaction
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class WaitingPaymentEntity(
+data class TransactionEntity(
     var idPembayaran : String = "",
     var buyerName : String = "",
     var buyerId : String = "",

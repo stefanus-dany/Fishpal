@@ -41,12 +41,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pesananDikirim">
 
-                <TextView
-                    android:id="@+id/date_order_sent"
-                    style="@style/formatFont"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tanggal_dikirim" />
+<!--                <TextView-->
+<!--                    android:id="@+id/date_order_sent"-->
+<!--                    style="@style/formatFont"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/tanggal_dikirim" />-->
 
                 <TextView
                     android:id="@+id/invoice"

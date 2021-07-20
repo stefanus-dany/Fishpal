@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.fishbud.R
 import com.project.fishbud.databinding.ItemNewOrderBinding
 import com.project.fishbud.ui.main_ui.profile.OrderFishermanEntity
-import com.project.fishbud.ui.main_ui.profile.buyer.WaitingPaymentEntity
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList

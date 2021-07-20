@@ -1,4 +1,4 @@
-package com.project.fishbud.ui.main_ui.profile.buyer
+package com.project.fishbud.ui.main_ui.profile.buyer.transaction
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,7 +14,7 @@ import com.project.fishbud.ui.main_ui.profile.OrderFishermanEntity
 import com.project.fishbud.utils.DataFirebase
 
 
-class WaitingPaymentViewModel : ViewModel() {
+class TransactionViewModel : ViewModel() {
 
     @SuppressLint("StaticFieldLeak")
     lateinit var mContext: Context
@@ -29,9 +29,17 @@ class WaitingPaymentViewModel : ViewModel() {
         return mutableData
     }
 
-    fun getItemOrdered(idPembayaran: String): LiveData<MutableList<OrderFishermanEntity>> {
+    fun getIdShipping(): LiveData<MutableList<String>> {
+        val mutableData = MutableLiveData<MutableList<String>>()
+        DataFirebase.getIdShipping().observeForever {
+            mutableData.value = it
+        }
+        return mutableData
+    }
+
+    fun getItemShipping(idOrdered: List<String>): LiveData<MutableList<OrderFishermanEntity>> {
         val mutableData = MutableLiveData<MutableList<OrderFishermanEntity>>()
-        DataFirebase.getItemOrdered(idPembayaran).observeForever {
+        DataFirebase.getItemShipping(idOrdered).observeForever {
             mutableData.value = it
         }
         return mutableData
