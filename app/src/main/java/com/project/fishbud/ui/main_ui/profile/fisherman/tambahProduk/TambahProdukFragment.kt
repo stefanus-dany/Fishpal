@@ -1,4 +1,4 @@
-package com.project.fishbud.ui.main_ui.profile.tambahProduk
+package com.project.fishbud.ui.main_ui.profile.fisherman.tambahProduk
 
 import android.content.Intent
 import android.net.Uri

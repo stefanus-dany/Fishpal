@@ -23,6 +23,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentPaymentBinding
     private var cartPrice: Long = 0
+    private var countQuantity: Long = 0
     private var deliveryPrice: Long = 0
     private var totalPrice: Long = 0
     private var isChecked = false
@@ -67,6 +68,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
         val bundle: Bundle? = arguments
         if (bundle != null) {
             cartPrice = bundle.getLong(Constants.CART_PRICE_TO_PAYMENT, 0L)
+            countQuantity = bundle.getLong(Constants.COUNT_QUANTITY, 0L)
             dataIkan = bundle.getParcelableArrayList(Constants.DATA_TO_PAYMENT)
             Log.i("cio", "cek dataIkan  di payment: $dataIkan")
             binding.cartPrice.text = formatRupiah(cartPrice)
@@ -156,7 +158,8 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                         totalPrice,
                         timeDate,
                         date,
-                        dataIkan
+                        dataIkan,
+                        countQuantity
                     )
 
 

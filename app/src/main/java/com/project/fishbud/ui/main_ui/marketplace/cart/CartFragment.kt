@@ -25,6 +25,7 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
     private var ikanEntity: ArrayList<IkanEntity>? = null
     private var accumulation = mutableMapOf<Int, Long>()
     private var cartPrice : Long = 0
+    private var countQuantity : Long = 0
 
 
     override fun onCreateView(
@@ -82,7 +83,7 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
         }
     }
 
-    override fun totalHarga(value: Long, position: Int) {
+    override fun totalHarga(value: Long, position: Int, countQuantity : Long) {
         accumulation[position] = value
         var tmp = 0L
         for (i in 0 until (accumulation.size)) {
@@ -91,6 +92,7 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
             tmp += accumulation[i]!!
         }
         cartPrice = tmp
+        this.countQuantity = countQuantity
         val post = formatRupiah(tmp)
         binding.hargaCart.text = post
     }
@@ -111,7 +113,7 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
                     val paymentFragment = PaymentFragment()
                     val bundle = Bundle()
                     bundle.putLong(Constants.CART_PRICE_TO_PAYMENT, cartPrice)
-
+                    bundle.putLong(Constants.COUNT_QUANTITY, countQuantity)
                     val arrayList : ArrayList<IkanEntity> = ArrayList(ikanEntity)
                     bundle.putParcelableArrayList(Constants.DATA_TO_PAYMENT, arrayList)
                     Log.i("cio", "cek ikanEntity di cart : $ikanEntity")

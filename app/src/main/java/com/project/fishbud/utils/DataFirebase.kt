@@ -14,7 +14,7 @@ import com.google.firebase.database.ValueEventListener
 import com.project.fishbud.model.UserModel
 import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
 import com.project.fishbud.ui.main_ui.marketplace.checkout.PaymentEntity
-import com.project.fishbud.ui.main_ui.profile.buyer.OrderFishermanEntity
+import com.project.fishbud.ui.main_ui.profile.buyer.waitingPayment.OrderFishermanEntity
 import java.util.concurrent.Executors
 
 object DataFirebase {

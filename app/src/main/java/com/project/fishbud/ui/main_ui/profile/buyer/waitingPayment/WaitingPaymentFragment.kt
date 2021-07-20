@@ -1,4 +1,4 @@
-package com.project.fishbud.ui.main_ui.profile.buyer
+package com.project.fishbud.ui.main_ui.profile.buyer.waitingPayment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -67,7 +67,8 @@ class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPaym
             val totalHarga: Long = totalHarga
             val timePurchase: String = date
             val payBefore: String = timeDate
-            val dataIkan : String = dataIkan
+            val cPayountQuantity : Long = countQuantity
+
 
             viewModel.getItemOrdered(idPembayaran).observe(viewLifecycleOwner){
 
@@ -81,15 +82,10 @@ class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPaym
                     totalHarga,
                     timePurchase,
                     payBefore,
-                    dataIkan,
-                    it
+                    it,
+                    countQuantity
                 )
-
             }
-
-
-
-
 
             adapter.notifyItemRemoved(position)
         }

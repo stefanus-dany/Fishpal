@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentAkunPembeliBinding
-import com.project.fishbud.ui.main_ui.profile.buyer.WaitingPaymentFragment
-import com.project.fishbud.ui.main_ui.profile.tambahProduk.TambahProdukFragment
+import com.project.fishbud.ui.main_ui.profile.buyer.waitingPayment.WaitingPaymentFragment
+import com.project.fishbud.ui.main_ui.profile.fisherman.tambahProduk.TambahProdukFragment
 
 class AkunPembeliFragment : Fragment(), View.OnClickListener {
 

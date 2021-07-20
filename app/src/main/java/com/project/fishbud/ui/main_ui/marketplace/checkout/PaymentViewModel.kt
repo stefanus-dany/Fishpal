@@ -2,8 +2,6 @@ package com.project.fishbud.ui.main_ui.marketplace.checkout
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,9 +9,8 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import com.project.fishbud.model.UserModel
 import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
-import com.project.fishbud.ui.main_ui.profile.buyer.OrderFishermanEntity
+import com.project.fishbud.ui.main_ui.profile.buyer.waitingPayment.OrderFishermanEntity
 import com.project.fishbud.utils.DataFirebase
-import java.util.concurrent.Executors
 
 
 class PaymentViewModel : ViewModel() {
@@ -39,7 +36,8 @@ class PaymentViewModel : ViewModel() {
         totalHarga: Long,
         timeDate: String,
         date: String,
-        dataIkan: ArrayList<IkanEntity>?
+        dataIkan: ArrayList<IkanEntity>?,
+        countQuantity : Long
     ) {
         val reference =
             FirebaseDatabase.getInstance().reference.child("Users").child(buyerId)
@@ -54,8 +52,27 @@ class PaymentViewModel : ViewModel() {
             jenisPengiriman,
             totalHarga,
             timeDate,
-            date
+            date,
+            countQuantity
         )
+
+//        var nelayanId : String = "",
+//        var idPesanan : String = "",
+//        var namaIkan : String= "",
+//        var harga : Long = 0,
+//        var linkImage : String = "",
+//        var tokoIkan : String = "",
+//        var idPembayaran : String = "",
+//        var buyerName : String = "",
+//        var buyerId : String = "",
+//        var alamat : String = "",
+//        var kartuKredit : String = "",
+//        var jenisPengiriman : String = "",
+//        var totalHarga : Long = 0,
+//        var date : String = "",
+//        var payBefore : String = "",
+//        var countQuantity : Long = 0
+//
         reference.setValue(value).addOnCompleteListener { it ->
             if (it.isSuccessful) {
                 for (i in 0 until (dataIkan!!.size)){
@@ -74,13 +91,17 @@ class PaymentViewModel : ViewModel() {
                             .child(idPembayaran)
                             .child("itemOrdered")
                             .child(idProduk)
-                    val value2 = OrderFishermanEntity(
-                        nelayanId,
-                        idProduk,
-                        namaIkan,
-                        harga,
-                        linkImage,
-                        tokoIkan
+                    val value2 = PaymentEntity(
+                        idPembayaran,
+                        buyerName,
+                        buyerId,
+                        alamat,
+                        kartuKredit,
+                        jenisPengiriman,
+                        totalHarga,
+                        timeDate,
+                        date,
+                        countQuantity
                     )
                     reference2.setValue(value2).addOnCompleteListener { er ->
                         if (er.isSuccessful) {

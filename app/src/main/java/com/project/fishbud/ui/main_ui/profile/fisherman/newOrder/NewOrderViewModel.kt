@@ -1,4 +1,4 @@
-package com.project.fishbud.ui.main_ui.profile.buyer
+package com.project.fishbud.ui.main_ui.profile.fisherman.newOrder
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.project.fishbud.ui.main_ui.marketplace.checkout.PaymentEntity
+import com.project.fishbud.ui.main_ui.profile.buyer.waitingPayment.OrderFishermanEntity
 import com.project.fishbud.utils.DataFirebase
 
 

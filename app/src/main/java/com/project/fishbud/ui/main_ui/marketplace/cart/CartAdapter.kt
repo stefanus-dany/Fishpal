@@ -49,7 +49,7 @@ class CartAdapter(private var mCallback: CartHarga) : RecyclerView.Adapter<CartA
         fun bind(data: IkanEntity, position: Int) {
             with(binding) {
                 namaIkan.text = data.namaIkan
-                hargaKg.text = formatRupiah(data.harga.toLong(), 1)
+                hargaKg.text = formatRupiah(data.harga, 1)
                 tokoIkan.text = data.tokoIkan
                 Glide.with(itemView.context)
                     .load(data.linkImage)
@@ -59,13 +59,13 @@ class CartAdapter(private var mCallback: CartHarga) : RecyclerView.Adapter<CartA
                     if (countQuantity.text.toString() != "0") {
                         val numb = countQuantity.text.toString().toInt() - 1
                         countQuantity.setText(numb.toString())
-                        hargaIkan.text = formatRupiah((data.harga * numb).toLong(), 0)
-                        val price = (data.harga * numb).toLong()
+                        hargaIkan.text = formatRupiah((data.harga * numb), 0)
+                        val price = (data.harga * numb)
 
                         val tmp = formatRupiah(totalHarga, 0)
                         Log.i("cek_total", "totalHarga paling fix : $tmp")
                         //interface
-                        mCallback.totalHarga(price, position)
+                        mCallback.totalHarga(price, position, countQuantity.text.toString().toLong())
                         Log.i("cek_total", "totalHarga: $totalHarga")
                     }
                 }
@@ -74,11 +74,11 @@ class CartAdapter(private var mCallback: CartHarga) : RecyclerView.Adapter<CartA
                     val numb = countQuantity.text.toString().toInt() + 1
                     if ((data.harga * numb) < Int.MAX_VALUE && (data.harga * numb) > 0) {
                         countQuantity.setText(numb.toString())
-                        hargaIkan.text = formatRupiah((data.harga * numb).toLong(), 0)
-                        val price = (data.harga * numb).toLong()
+                        hargaIkan.text = formatRupiah((data.harga * numb), 0)
+                        val price = (data.harga * numb)
                         Log.i("cek_total", "totalHarga: $totalHarga")
                         //interface
-                        mCallback.totalHarga(price, position)
+                        mCallback.totalHarga(price, position, countQuantity.text.toString().toLong())
                     } else {
                         Toast.makeText(mContext, "Maksimum harga", Toast.LENGTH_SHORT).show()
                     }
@@ -104,6 +104,6 @@ class CartAdapter(private var mCallback: CartHarga) : RecyclerView.Adapter<CartA
     }
 
     interface CartHarga {
-        fun totalHarga(value: Long, position: Int)
+        fun totalHarga(value: Long, position: Int, countQuantity : Long)
     }
 }

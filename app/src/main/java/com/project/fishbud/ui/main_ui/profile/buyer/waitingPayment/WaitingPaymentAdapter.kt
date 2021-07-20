@@ -1,4 +1,4 @@
-package com.project.fishbud.ui.main_ui.profile.buyer
+package com.project.fishbud.ui.main_ui.profile.buyer.waitingPayment
 
 import android.content.Context
 import android.view.LayoutInflater
