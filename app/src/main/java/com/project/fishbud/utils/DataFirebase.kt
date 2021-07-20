@@ -13,6 +13,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.project.fishbud.model.UserModel
 import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
+import com.project.fishbud.ui.main_ui.marketplace.checkout.PaymentEntity
+import com.project.fishbud.ui.main_ui.profile.buyer.OrderFishermanEntity
 import java.util.concurrent.Executors
 
 object DataFirebase {
@@ -88,6 +90,100 @@ object DataFirebase {
                         data.clear()
                         for (dataSnapshot: DataSnapshot in snapshot.children) {
                             val value = dataSnapshot.getValue(IkanEntity::class.java)
+                            if (value != null) {
+                                data.add(value)
+                            }
+                        }
+                        mutableData.value = data
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+                Log.i("cek_data", "getDataUser: $data")
+
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            handler.post {
+                // Update ui in main thread
+                bgthread = Thread()
+                bgthread?.start()
+            }
+        }
+
+        return mutableData
+    }
+
+    fun getDataPayment(): LiveData<MutableList<PaymentEntity>> {
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser as FirebaseUser
+//        Log.i("cek_error", "masuk getDataUser: ")
+        val mutableData = MutableLiveData<MutableList<PaymentEntity>>()
+        val data = mutableListOf<PaymentEntity>()
+
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            // Simulate process in background thread
+            try {
+                val reference = FirebaseDatabase.getInstance().reference.child("Users")
+                    .child(user.uid)
+                    .child("waitingPayment")
+                Log.i("cek_data", "user.uid: ${user.uid}")
+                reference.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        data.clear()
+                        for (dataSnapshot: DataSnapshot in snapshot.children) {
+                            val value = dataSnapshot.getValue(PaymentEntity::class.java)
+                            if (value != null) {
+                                data.add(value)
+                            }
+                        }
+                        mutableData.value = data
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+                Log.i("cek_data", "getDataUser: $data")
+
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            handler.post {
+                // Update ui in main thread
+                bgthread = Thread()
+                bgthread?.start()
+            }
+        }
+
+        return mutableData
+    }
+
+    fun getItemOrdered(idPembayaran : String): LiveData<MutableList<OrderFishermanEntity>> {
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser as FirebaseUser
+//        Log.i("cek_error", "masuk getDataUser: ")
+        val mutableData = MutableLiveData<MutableList<OrderFishermanEntity>>()
+        val data = mutableListOf<OrderFishermanEntity>()
+
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            // Simulate process in background thread
+            try {
+                val reference = FirebaseDatabase.getInstance().reference.child("Users")
+                    .child(user.uid)
+                    .child("waitingPayment")
+                    .child(idPembayaran)
+                    .child("itemOrdered")
+                Log.i("cek_data", "user.uid: ${user.uid}")
+                reference.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        data.clear()
+                        for (dataSnapshot: DataSnapshot in snapshot.children) {
+                            val value = dataSnapshot.getValue(OrderFishermanEntity::class.java)
                             if (value != null) {
                                 data.add(value)
                             }

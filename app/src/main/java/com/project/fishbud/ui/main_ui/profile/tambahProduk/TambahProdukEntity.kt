@@ -9,5 +9,6 @@ data class TambahProdukEntity(
     var namaIkan : String = "",
     var harga : Int = 0,
     var tokoIkan : String = "",
-    var linkImage : String = ""
+    var linkImage : String = "",
+    var userId : String = ""
 ) : Parcelable

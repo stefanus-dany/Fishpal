@@ -64,7 +64,8 @@ class IkanAdapter(mContext: Context, onItemClick: OnItemClick) : RecyclerView.Ad
                         data.namaIkan,
                         data.harga,
                         data.tokoIkan,
-                        data.linkImage
+                        data.linkImage,
+                        data.userId
                     )
                     Log.i("cek_bind", "bind: $dataIkanToCart")
                     val executor = Executors.newSingleThreadExecutor()
@@ -93,7 +94,7 @@ class IkanAdapter(mContext: Context, onItemClick: OnItemClick) : RecyclerView.Ad
             }
         }
 
-        private fun formatRupiah(number: Int): String {
+        private fun formatRupiah(number: Long): String {
             val localeID = Locale("IND", "ID")
             val numberFormat = NumberFormat.getCurrencyInstance(localeID)
             val formatRupiah = numberFormat.format(number)

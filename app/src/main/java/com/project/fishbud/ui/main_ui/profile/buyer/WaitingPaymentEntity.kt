@@ -1,10 +1,10 @@
-package com.project.fishbud.ui.main_ui.marketplace.checkout
+package com.project.fishbud.ui.main_ui.profile.buyer
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class PaymentEntity(
+data class WaitingPaymentEntity(
     var idPembayaran : String = "",
     var buyerName : String = "",
     var buyerId : String = "",
@@ -12,6 +12,7 @@ data class PaymentEntity(
     var kartuKredit : String = "",
     var jenisPengiriman : String = "",
     var totalHarga : Long = 0,
-    var timeDate : String = "",
     var date : String = "",
+    var timeDate : String = "",
+    var dataIkan : String = "",
 ) : Parcelable

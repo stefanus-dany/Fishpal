@@ -4,14 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import com.project.fishbud.model.UserModel
-import com.project.fishbud.ui.main_ui.profile.tambahProduk.TambahProdukEntity
+import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
+import com.project.fishbud.ui.main_ui.profile.buyer.OrderFishermanEntity
 import com.project.fishbud.utils.DataFirebase
 import java.util.concurrent.Executors
 
@@ -20,17 +20,6 @@ class PaymentViewModel : ViewModel() {
 
     @SuppressLint("StaticFieldLeak")
     lateinit var mContext: Context
-
-    //implementasi alfabet acak untuk id
-    private var alphabet: List<Char> = emptyList()
-    private lateinit var idPembayaran: String
-    private var bgthread: Thread? = null
-    private var check = false
-
-    init {
-        alphabet = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-        idPembayaran = List(20) { alphabet.random() }.joinToString("")
-    }
 
     fun getDataUser(): LiveData<MutableList<UserModel>> {
         val mutableData = MutableLiveData<MutableList<UserModel>>()
@@ -41,56 +30,85 @@ class PaymentViewModel : ViewModel() {
     }
 
     fun storeToDatabase(
-        buyerName : String,
-        buyerId : String,
-        alamat : String,
-        kartuKredit : String,
-        jenisPengiriman : String,
-        totalHarga : Long,
-        timeDate : String
+        idPembayaran: String,
+        buyerName: String,
+        buyerId: String,
+        alamat: String,
+        kartuKredit: String,
+        jenisPengiriman: String,
+        totalHarga: Long,
+        timeDate: String,
+        date: String,
+        dataIkan: ArrayList<IkanEntity>?
     ) {
-        val executor = Executors.newSingleThreadExecutor()
-        val handler = Handler(Looper.getMainLooper())
-        executor.execute {
-            // Simulate process in background thread
-            try {
-                if (!check) {
-                    val reference =
+        val reference =
+            FirebaseDatabase.getInstance().reference.child("Users").child(buyerId)
+                .child("waitingPayment")
+                .child(idPembayaran)
+        val value = PaymentEntity(
+            idPembayaran,
+            buyerName,
+            buyerId,
+            alamat,
+            kartuKredit,
+            jenisPengiriman,
+            totalHarga,
+            timeDate,
+            date
+        )
+        reference.setValue(value).addOnCompleteListener { it ->
+            if (it.isSuccessful) {
+                for (i in 0 until (dataIkan!!.size)){
+                    val data = dataIkan[i]
+                    //${tmp.userId} ${tmp.idProduk} ${tmp.namaIkan} ${tmp.tokoIkan} ${tmp.linkImage} ${tmp.harga}
+                    val idProduk = data.idProduk
+                    val nelayanId = data.userId
+                    val namaIkan = data.namaIkan
+                    val tokoIkan = data.tokoIkan
+                    val linkImage = data.linkImage
+                    val harga = data.harga
+
+                    val reference2 =
                         FirebaseDatabase.getInstance().reference.child("Users").child(buyerId)
                             .child("waitingPayment")
                             .child(idPembayaran)
-                    val value = PaymentEntity(
-                        idPembayaran,
-                        buyerName,
-                        buyerId,
-                        alamat,
-                        kartuKredit,
-                        jenisPengiriman,
-                        totalHarga,
-                        timeDate
+                            .child("itemOrdered")
+                            .child(idProduk)
+                    val value2 = OrderFishermanEntity(
+                        nelayanId,
+                        idProduk,
+                        namaIkan,
+                        harga,
+                        linkImage,
+                        tokoIkan
                     )
-                    reference.setValue(value).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            Toast.makeText(
-                                mContext,
-                                "Produk telah ditambahkan!",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                    reference2.setValue(value2).addOnCompleteListener { er ->
+                        if (er.isSuccessful) {
+
                         } else {
                             Toast.makeText(mContext, "Error from database", Toast.LENGTH_SHORT)
                                 .show()
                         }
                     }
                 }
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-            }
-            handler.post {
-                // Update ui in main thread
-                bgthread = Thread()
-                bgthread?.start()
+            } else {
+                Toast.makeText(mContext, "Error from database", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
+
+//        var forDataIkan = ""
+//        if (dataIkan != null) {
+//            for (i in 0 until (dataIkan.size)) {
+//                val tmp = dataIkan[i]
+//                forDataIkan += if (i != (dataIkan.size - 1)) {
+//                    ("${tmp.userId} ${tmp.idProduk} ${tmp.namaIkan} ${tmp.tokoIkan} ${tmp.linkImage} ${tmp.harga}, ")
+//                } else {
+//                    ("${tmp.userId} ${tmp.idProduk} ${tmp.namaIkan} ${tmp.tokoIkan} ${tmp.linkImage} ${tmp.harga}")
+//                }
+//            }
+//        }
+
 
     }
 }

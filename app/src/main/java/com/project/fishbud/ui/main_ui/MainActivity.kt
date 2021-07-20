@@ -91,4 +91,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onStart()
         Log.i(TAG, "onStart: ")
     }
+
+//    override fun onBackPressed() {
+//        super.onDestroy()
+//    }
 }

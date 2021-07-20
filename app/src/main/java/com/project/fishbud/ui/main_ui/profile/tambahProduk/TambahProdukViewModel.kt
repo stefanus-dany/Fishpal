@@ -95,7 +95,8 @@ class TambahProdukViewModel : ViewModel() {
                     namaIkan,
                     hargaIkan,
                     "Toko Ikan $namaUser",
-                    urlImage
+                    urlImage,
+                    userId
                 )
                 reference.setValue(value).addOnCompleteListener {
                     if (it.isSuccessful) {

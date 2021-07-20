@@ -15,15 +15,17 @@ import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
 import com.project.fishbud.ui.main_ui.marketplace.checkout.PaymentFragment
 import java.text.NumberFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
 
     private lateinit var binding: FragmentCartBinding
     private lateinit var cartAdapter: CartAdapter
-    private var ikanEntity: IkanEntity? = null
+    private var ikanEntity: ArrayList<IkanEntity>? = null
     private var accumulation = mutableMapOf<Int, Long>()
     private var cartPrice : Long = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,14 +42,21 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
             layoutManager = LinearLayoutManager(context)
             adapter = cartAdapter
         }
-        Log.i("ceek", "onViewCreated: $ikanEntity")
         with(cartAdapter) {
             val bundle: Bundle? = arguments
             if (bundle != null) {
                 val data = bundle.getParcelableArrayList<IkanEntity>(Constants.DATA_TO_CART_VALUE)
+                ikanEntity = data
                 Log.i("cik", "onClick222: $data")
                 if (data != null) {
                     if (data.isNotEmpty()) {
+                        with(binding) {
+                            rvCart.visibility = View.VISIBLE
+                            ivHarga.visibility = View.VISIBLE
+                            btnBeliSekarang.visibility = View.VISIBLE
+                            hargaCart.visibility = View.VISIBLE
+                            halamanKosong.visibility = View.GONE
+                        }
                         //isi map dengan nilai 0 agar saat di cart ga ada error jika isi quantity dari 1 langsung ke 3/4/5...
                         for (i in 0 until (data.size)){
                             accumulation[i] = 0
@@ -102,6 +111,11 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
                     val paymentFragment = PaymentFragment()
                     val bundle = Bundle()
                     bundle.putLong(Constants.CART_PRICE_TO_PAYMENT, cartPrice)
+
+                    val arrayList : ArrayList<IkanEntity> = ArrayList(ikanEntity)
+                    bundle.putParcelableArrayList(Constants.DATA_TO_PAYMENT, arrayList)
+                    Log.i("cio", "cek ikanEntity di cart : $ikanEntity")
+                    Log.i("cio", "cek dataIkan di cart : $arrayList")
                     paymentFragment.arguments = bundle
                     makeCurrentFragment(paymentFragment)
                 } else {

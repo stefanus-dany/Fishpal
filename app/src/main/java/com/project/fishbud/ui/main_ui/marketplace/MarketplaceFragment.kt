@@ -50,6 +50,7 @@ class MarketplaceFragment : Fragment(), OnItemClick {
             val bundle = Bundle()
             val arrayList : ArrayList<IkanEntity> = ArrayList(ikanEntity)
             bundle.putParcelableArrayList(Constants.DATA_TO_CART_VALUE, arrayList)
+            Log.i("cio", "cek dataIkan di marketplace : $arrayList")
             cartFragment.arguments = bundle
             makeCurrentFragment(cartFragment)
         }

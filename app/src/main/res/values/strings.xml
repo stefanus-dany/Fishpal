@@ -51,6 +51,14 @@
     <string name="proses">Proses</string>
     <string name="biaya_keranjang">Biaya Keranjang</string>
     <string name="biaya_pengiriman">Biaya Pengiriman</string>
+    <string name="_23_juni_2021">23 Juni 2021</string>
+    <string name="pay_before">Lakukan pembayaran sebelum :\n%s</string>
+    <string name="date_order">Dipesan : %s</string>
+    <string name="total_waiting_payment">Total :\n%s</string>
+    <string name="id_payment">ID Pembayaran :\n%s</string>
+    <string name="no_credit_card">No. Kartu Kredit :\n%s</string>
+    <string name="menunggu_pembayaran">Menunggu Pembayaran</string>
+    <string name="bayar">Bayar</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 

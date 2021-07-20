@@ -1,5 +1,6 @@
 package com.project.fishbud.ui.main_ui.marketplace.checkout
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,10 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.project.fishbud.Constants
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentPaymentBinding
-import com.project.fishbud.ui.main_ui.profile.tambahProduk.TambahProdukViewModel
-import java.text.DateFormat
+import com.project.fishbud.ui.main_ui.MainActivity
+import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PaymentFragment : Fragment(), View.OnClickListener {
 
@@ -23,10 +26,16 @@ class PaymentFragment : Fragment(), View.OnClickListener {
     private var deliveryPrice: Long = 0
     private var totalPrice: Long = 0
     private var isChecked = false
-    private lateinit var viewModel : PaymentViewModel
+    private lateinit var viewModel: PaymentViewModel
     private var timeDate = ""
+    private var date = ""
     private var jenisPengiriman = ""
     private var count = 0
+    private var dataIkan : ArrayList<IkanEntity>? = null
+
+    //implementasi alfabet acak untuk id
+    private var alphabet: List<Char> = emptyList()
+    private lateinit var idPembayaran: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,12 +55,20 @@ class PaymentFragment : Fragment(), View.OnClickListener {
         viewModel.mContext = requireContext()
 
         //get current date and time
-        val calendar = Calendar.getInstance().time
-        timeDate = DateFormat.getDateTimeInstance().format(calendar)
+        val cal = Calendar.getInstance()
+        val dt = cal.time
+        val sdf = SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.US)
+        timeDate = sdf.format(dt)
+
+        //get date only
+        val sdf0 = SimpleDateFormat("dd MMM yyyy", Locale.US)
+        date = sdf0.format(dt)
 
         val bundle: Bundle? = arguments
         if (bundle != null) {
             cartPrice = bundle.getLong(Constants.CART_PRICE_TO_PAYMENT, 0L)
+            dataIkan = bundle.getParcelableArrayList(Constants.DATA_TO_PAYMENT)
+            Log.i("cio", "cek dataIkan  di payment: $dataIkan")
             binding.cartPrice.text = formatRupiah(cartPrice)
         }
 
@@ -117,8 +134,11 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                     return onClick(view)
                 }
 
-                var buyerName = ""
-                var buyerId = ""
+                var buyerName: String
+                var buyerId: String
+                //generate idPembayaran
+                alphabet = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+                idPembayaran = List(20) { alphabet.random() }.joinToString("")
 
                 viewModel.getDataUser().observe(viewLifecycleOwner, {
                     count++
@@ -127,22 +147,25 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                     buyerId = it[0].id
                     //store data to database
                     viewModel.storeToDatabase(
+                        idPembayaran,
                         buyerName,
                         buyerId,
                         binding.etAddress.text.toString().trim(),
                         binding.etPayment.text.toString().trim(),
                         jenisPengiriman,
                         totalPrice,
-                        timeDate
+                        timeDate,
+                        date,
+                        dataIkan
                     )
+
+
+                    startActivity(Intent(activity, MainActivity::class.java))
+                    activity?.finish()
+                    binding.progressBar.visibility = View.GONE
 
                 })
 
-
-
-
-
-                binding.progressBar.visibility = View.GONE
             }
         }
     }

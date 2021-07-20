@@ -7,15 +7,25 @@
     tools:context=".ui.viewPager.AkunPembeliFragment">
 
     <Button
+        android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/btn"/>
+        android:text="Tambah Produk"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_waiting_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Menunggu Pembayaran"
+        android:textAllCaps="false" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Akun Pembeli"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 
 </LinearLayout>
