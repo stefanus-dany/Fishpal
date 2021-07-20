@@ -59,6 +59,10 @@
     <string name="no_credit_card">No. Kartu Kredit :\n%s</string>
     <string name="menunggu_pembayaran">Menunggu Pembayaran</string>
     <string name="bayar">Bayar</string>
+    <string name="tanggal_dikirim">%s WIB</string>
+    <string name="invoice">INV/%s/%s</string>
+    <string name="list_order">Ikan Gurame (Toko Ikan Steve)\nIkan Lele (Toko Ikan Bryan)</string>
+    <string name="total_payment">Total Pembayaran\n%s</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 
