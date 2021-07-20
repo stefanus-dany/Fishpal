@@ -67,6 +67,7 @@
     <string name="proses_sekarang">Proses Sekarang</string>
     <string name="pendapatan">Pendapatan Anda %s</string>
     <string name="transaksi_berlangsung">Transaksi Berlangsung</string>
+    <string name="daftar_produk">Daftar Produk</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 

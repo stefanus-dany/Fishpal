@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main_ui.profile.fisherman.new_order.NewOrderFragment">
+    tools:context=".ui.main_ui.profile.fisherman.my_product.MyProductFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -38,39 +38,48 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/main_margin"
-                    android:text="@string/pesanan_baru"
+                    android:text="@string/daftar_produk"
                     android:textSize="@dimen/main_fontSize"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btn_add_product"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="@dimen/indent_margin"
+                    android:src="@drawable/ic_baseline_add_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <ImageView
-        android:id="@+id/halaman_kosong"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:src="@drawable/gambar_kosong"
-        android:visibility="gone"
+        android:id="@+id/imageView6"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/bg_home_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_new_order"
+        android:id="@+id/rv_my_product"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/indent_margin"
         android:layout_marginTop="@dimen/main_margin"
+        android:paddingBottom="@dimen/bottomFab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

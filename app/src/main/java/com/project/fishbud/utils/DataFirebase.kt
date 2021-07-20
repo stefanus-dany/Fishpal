@@ -115,6 +115,54 @@ object DataFirebase {
         return mutableData
     }
 
+    fun getMyProduct(): LiveData<MutableList<IkanEntity>> {
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser as FirebaseUser
+//        Log.i("cek_error", "masuk getDataUser: ")
+        val mutableData = MutableLiveData<MutableList<IkanEntity>>()
+        val data = mutableListOf<IkanEntity>()
+
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            // Simulate process in background thread
+            try {
+                val reference = FirebaseDatabase.getInstance().reference
+                    .child("Users")
+                    .child(user.uid)
+                    .child("myProduk")
+                Log.i("cekIkan", "uid : ${user.uid}")
+                reference.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        data.clear()
+                        for (dataSnapshot: DataSnapshot in snapshot.children) {
+                            val value = dataSnapshot.getValue(IkanEntity::class.java)
+                            if (value != null) {
+                                data.add(value)
+                                Log.i("cekIkan", "data.add : $data")
+                            }
+                        }
+                        mutableData.value = data
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+                Log.i("cek_data", "getDataUser: $data")
+
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            handler.post {
+                // Update ui in main thread
+                bgthread = Thread()
+                bgthread?.start()
+            }
+        }
+
+        return mutableData
+    }
+
     fun getDataPayment(): LiveData<MutableList<PaymentEntity>> {
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser as FirebaseUser
