@@ -79,8 +79,9 @@
                 android:layout_marginStart="@dimen/main_margin"
                 android:text="@string/nama_toko"
                 android:textSize="14sp"
-
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintBottom_toBottomOf="@+id/addToCart"
+                app:layout_constraintEnd_toStartOf="@+id/addToCart"
                 app:layout_constraintStart_toEndOf="@+id/iv_gambarIkan"
                 app:layout_constraintTop_toTopOf="@+id/addToCart" />
 

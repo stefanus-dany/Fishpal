@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentAkunTokoBinding
-import com.project.fishbud.ui.main_ui.profile.tambahProduk.TambahProdukFragment
+import com.project.fishbud.ui.main_ui.profile.fisherman.new_order.NewOrderFragment
+import com.project.fishbud.ui.main_ui.profile.fisherman.tambahProduk.TambahProdukFragment
 
-class AkunTokoFragment : Fragment() {
+class AkunTokoFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding : FragmentAkunTokoBinding
 
@@ -23,6 +24,8 @@ class AkunTokoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnTambahProduk.setOnClickListener(this)
+        binding.btnPesananBaru.setOnClickListener(this)
     }
 
     private fun makeCurrentFragment(fragment: Fragment) {
@@ -30,6 +33,20 @@ class AkunTokoFragment : Fragment() {
             replace(R.id.fl_main_ui, fragment)
             addToBackStack(null)
             commit()
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.btn_tambah_produk -> {
+                val tambahProdukFragment = TambahProdukFragment()
+                makeCurrentFragment(tambahProdukFragment)
+            }
+
+            R.id.btn_pesanan_baru -> {
+                val newOrderFragment = NewOrderFragment()
+                makeCurrentFragment(newOrderFragment)
+            }
         }
     }
 

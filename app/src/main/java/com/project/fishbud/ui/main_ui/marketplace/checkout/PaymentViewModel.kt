@@ -2,8 +2,6 @@ package com.project.fishbud.ui.main_ui.marketplace.checkout
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,9 +9,8 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.FirebaseDatabase
 import com.project.fishbud.model.UserModel
 import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
-import com.project.fishbud.ui.main_ui.profile.buyer.OrderFishermanEntity
+import com.project.fishbud.ui.main_ui.profile.OrderFishermanEntity
 import com.project.fishbud.utils.DataFirebase
-import java.util.concurrent.Executors
 
 
 class PaymentViewModel : ViewModel() {
@@ -80,7 +77,8 @@ class PaymentViewModel : ViewModel() {
                         namaIkan,
                         harga,
                         linkImage,
-                        tokoIkan
+                        tokoIkan,
+                        idPembayaran
                     )
                     reference2.setValue(value2).addOnCompleteListener { er ->
                         if (er.isSuccessful) {

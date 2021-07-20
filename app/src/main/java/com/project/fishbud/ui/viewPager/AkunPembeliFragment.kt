@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentAkunPembeliBinding
 import com.project.fishbud.ui.main_ui.profile.buyer.WaitingPaymentFragment
-import com.project.fishbud.ui.main_ui.profile.tambahProduk.TambahProdukFragment
+import com.project.fishbud.ui.main_ui.profile.fisherman.tambahProduk.TambahProdukFragment
 
 class AkunPembeliFragment : Fragment(), View.OnClickListener {
 
@@ -24,7 +24,6 @@ class AkunPembeliFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btn.setOnClickListener(this)
         binding.btnWaitingPayment.setOnClickListener(this)
     }
 
@@ -38,10 +37,6 @@ class AkunPembeliFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.btn -> {
-                val tambahProdukFragment = TambahProdukFragment()
-                makeCurrentFragment(tambahProdukFragment)
-            }
 
             R.id.btn_waiting_payment -> {
                 val waitingPaymentFragment = WaitingPaymentFragment()

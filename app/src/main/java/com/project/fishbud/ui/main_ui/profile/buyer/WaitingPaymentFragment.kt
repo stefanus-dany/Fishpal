@@ -86,11 +86,6 @@ class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPaym
                 )
 
             }
-
-
-
-
-
             adapter.notifyItemRemoved(position)
         }
     }

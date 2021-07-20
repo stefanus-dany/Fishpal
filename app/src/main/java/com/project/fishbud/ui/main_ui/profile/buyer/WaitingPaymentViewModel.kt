@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.project.fishbud.ui.main_ui.marketplace.checkout.PaymentEntity
+import com.project.fishbud.ui.main_ui.profile.OrderFishermanEntity
 import com.project.fishbud.utils.DataFirebase
 
 
@@ -73,17 +74,18 @@ class WaitingPaymentViewModel : ViewModel() {
                 harga,
                 linkImage,
                 tokoIkan,
+                idPembayaran
             )
 
             reference2.setValue(value).addOnCompleteListener {
                 if (it.isSuccessful) {
                     //tambah idPesanan
-                    val reference0 =
-                        FirebaseDatabase.getInstance().reference.child("Users").child(nelayanId)
-                            .child("itemOrdered")
-                            .child(idPembayaran)
-                            .child("idPesanan")
-                    reference0.setValue(idPembayaran)
+//                    val reference0 =
+//                        FirebaseDatabase.getInstance().reference.child("Users").child(nelayanId)
+//                            .child("itemOrdered")
+//                            .child(idPembayaran)
+//                            .child("idPesanan")
+//                    reference0.setValue(idPembayaran)
 
                     //hapus dari waitingWayment
                     val reference =

@@ -1,4 +1,4 @@
-package com.project.fishbud.ui.main_ui.profile.buyer
+package com.project.fishbud.ui.main_ui.profile
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -10,5 +10,6 @@ data class OrderFishermanEntity(
     var namaIkan : String= "",
     var harga : Long = 0,
     var linkImage : String = "",
-    var tokoIkan : String = ""
+    var tokoIkan : String = "",
+    var idPembayaran : String = ""
 ) : Parcelable
