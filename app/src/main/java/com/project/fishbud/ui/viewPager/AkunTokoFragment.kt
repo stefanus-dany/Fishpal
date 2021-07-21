@@ -30,7 +30,7 @@ class AkunTokoFragment : Fragment(), View.OnClickListener {
     }
 
     private fun makeCurrentFragment(fragment: Fragment) {
-        fragmentManager?.beginTransaction()?.apply {
+        activity?.supportFragmentManager?.beginTransaction()?.apply {
             replace(R.id.fl_main_ui, fragment)
             addToBackStack(null)
             commit()

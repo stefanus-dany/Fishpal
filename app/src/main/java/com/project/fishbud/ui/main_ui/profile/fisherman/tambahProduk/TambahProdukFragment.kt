@@ -97,6 +97,8 @@ class TambahProdukFragment : Fragment(), View.OnClickListener {
                         uriImage!!,
                         userId
                     )
+
+                    fragmentManager?.popBackStack()
                 })
 
                 binding.progressBar.visibility = View.GONE

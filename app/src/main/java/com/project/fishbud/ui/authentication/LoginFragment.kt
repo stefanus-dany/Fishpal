@@ -165,7 +165,8 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         if (currentUser != null) {
             if (currentUser.isEmailVerified) {
-                startActivity(Intent(context, MainActivity::class.java))
+                //fix error getPackageName, before below, use activity?.startActivity
+                context?.startActivity(Intent(context, MainActivity::class.java))
                 activity?.finish()
             }
         }

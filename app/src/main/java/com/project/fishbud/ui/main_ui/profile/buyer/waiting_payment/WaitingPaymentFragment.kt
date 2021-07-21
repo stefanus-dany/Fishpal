@@ -38,6 +38,9 @@ class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPaym
         }
 
         observeData()
+        binding.btnBack.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
     }
 
     private fun observeData() {
