@@ -1,33 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.viewPager.AkunPembeliFragment">
 
-    <Button
-        android:id="@+id/btn_waiting_payment"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Menunggu Pembayaran"
-        android:textAllCaps="false" />
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="@dimen/indent_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btn_transaction"
-        android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/profile"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_margin"
+                android:fontFamily="@font/poppins"
+                android:text="@string/welcome"
+                android:textSize="@dimen/main_fontSize"
+                app:layout_constraintStart_toEndOf="@id/profile_image"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/formatFont.semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_name"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/welcome"
+                app:layout_constraintTop_toBottomOf="@+id/welcome" />
+
+            <ImageView
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_logout_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/profile"
+            style="@style/formatFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="40dp"
+            android:drawablePadding="@dimen/main_margin"
+            android:gravity="center_vertical"
+            android:text="@string/profile"
+            android:textSize="@dimen/main_fontSize"
+            app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24"
+            app:drawableStartCompat="@drawable/ic_baseline_person_outline_24" />
+
+        <TextView
+            android:id="@+id/tv_daftar_transaksi"
+            style="@style/formatFont.bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="40dp"
+            android:drawablePadding="@dimen/main_margin"
+            android:gravity="center_vertical"
+            android:text="@string/daftar_transaksi"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/waiting_payment"
+            style="@style/formatFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/main_margin"
+            android:drawablePadding="@dimen/main_margin"
+            android:gravity="center_vertical"
+            android:text="@string/menunggu_pembayaran"
+            android:textSize="@dimen/main_fontSize"
+            app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24"
+            app:drawableStartCompat="@drawable/ic_baseline_payment_24" />
+
+        <TextView
+            android:id="@+id/transaction"
+            style="@style/formatFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/main_margin"
+            android:drawablePadding="@dimen/main_margin"
+            android:gravity="center_vertical"
+            android:text="@string/transaksi_berlangsung"
+            android:textSize="@dimen/main_fontSize"
+            app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24"
+            app:drawableStartCompat="@drawable/ic_baseline_shopping_bag_24" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Transaksi Berlangsung"
-        android:textAllCaps="false" />
+        android:adjustViewBounds="true"
+        android:src="@drawable/bg_home_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/toast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="TOAST"
-        android:textAllCaps="false" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

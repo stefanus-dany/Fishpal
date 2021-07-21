@@ -1,22 +1,23 @@
 package com.project.fishbud.ui.main_ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.project.fishbud.R
 import com.project.fishbud.databinding.ActivityMainBinding
 import com.project.fishbud.ui.authentication.AuthenticationActivity
+import com.project.fishbud.ui.main_ui.community.CommunityFragment
 import com.project.fishbud.ui.main_ui.marketplace.MarketplaceFragment
 import com.project.fishbud.ui.main_ui.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var binding : ActivityMainBinding
-    private lateinit var auth : FirebaseAuth
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
     private val TAG = "check"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,19 +56,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             true
         }
-
-        binding.btnLogout.setOnClickListener(this)
         binding.detection.setOnClickListener(this)
 
     }
 
     override fun onClick(v: View?) {
-        when (v?.id){
-            R.id.btnLogout -> {
-                auth.signOut()
-                startActivity(Intent(this, AuthenticationActivity::class.java))
-                finish()
-            }
+        when (v?.id) {
 
             R.id.detection -> {
 
@@ -92,7 +86,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.i(TAG, "onStart: ")
     }
 
-//    override fun onBackPressed() {
-//        super.onDestroy()
-//    }
+    override fun onBackPressed() {
+        if (binding.bottomNavigationView.selectedItemId == R.id.bnv_home) {
+            super.onBackPressed()
+        } else {
+            val fragment =
+                this.supportFragmentManager.findFragmentById(R.id.fl_main_ui)
+            (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+                Log.i("cekcek", "onBackPressed: ")
+                makeCurrentFragment(HomeFragment())
+                binding.bottomNavigationView.selectedItemId = R.id.bnv_home
+            }
+        }
+    }
+
+    interface IOnBackPressed {
+        fun onBackPressed(): Boolean
+    }
+
 }

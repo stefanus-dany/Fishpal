@@ -22,7 +22,6 @@ class AuthenticationActivity : AppCompatActivity() {
     private fun makeCurrentFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper, fragment)
-            addToBackStack(null)
             commit()
         }
     }

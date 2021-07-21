@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.project.fishbud.databinding.FragmentProfileBinding
+import com.project.fishbud.ui.main_ui.MainActivity
 import com.project.fishbud.ui.viewPager.SectionsPagerAdapter
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), MainActivity.IOnBackPressed{
 
     private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -40,6 +41,9 @@ class ProfileFragment : Fragment() {
                 }
             }
         }.attach()
+    }
 
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

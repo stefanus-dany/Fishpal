@@ -25,7 +25,6 @@
     <string name="akun_toko">Akun Toko</string>
     <string name="marketplace">Marketplace</string>
     <string name="community">Community</string>
-    <string name="profile">Profile</string>
     <string name="you_re_in_jakarta">You\'re in <b>Jakarta</b></string>
     <string name="ukuran_maksimum">Ukuran\nmaksimum</string>
     <string name="perkiraan_nusia">Perkiraan\nusia</string>
@@ -66,8 +65,13 @@
     <string name="pesanan_baru">Pesanan Baru</string>
     <string name="proses_sekarang">Proses Sekarang</string>
     <string name="pendapatan">Pendapatan Anda %s</string>
-    <string name="transaksi_berlangsung">Transaksi Berlangsung</string>
     <string name="daftar_produk">Daftar Produk</string>
+    <string name="profile">Profile</string>
+    <string name="welcome">Welcome</string>
+    <string name="user_name">Bapak Budiawan</string>
+    <string name="akun">Akun</string>
+    <string name="daftar_transaksi">Daftar Transaksi</string>
+    <string name="transaksi_berlangsung">Transaksi Berlangsung</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 

@@ -12,10 +12,11 @@ import com.project.fishbud.Constants
 import com.project.fishbud.OnItemClick
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentMarketplaceNewBinding
+import com.project.fishbud.ui.main_ui.MainActivity
 import com.project.fishbud.ui.main_ui.marketplace.cart.CartFragment
 
 
-class MarketplaceFragment : Fragment(), OnItemClick {
+class MarketplaceFragment : Fragment(), OnItemClick, MainActivity.IOnBackPressed {
 
     private lateinit var binding: FragmentMarketplaceNewBinding
     private lateinit var viewModel: IkanViewModel
@@ -80,6 +81,10 @@ class MarketplaceFragment : Fragment(), OnItemClick {
     override fun onClick(value: IkanEntity) {
         Log.i("cik", "onClick: $value")
         ikanEntity.add(value)
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 
 }
