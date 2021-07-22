@@ -19,7 +19,7 @@ import java.util.concurrent.Executors
 class VerifiedEmailFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding : FragmentVerifiedEmailBinding
-    private lateinit var user: FirebaseUser
+    private var user: FirebaseUser? = null
     private lateinit var auth: FirebaseAuth
     private var bgthread: Thread? = null
     private var resendCodeTime = 59
@@ -35,9 +35,14 @@ class VerifiedEmailFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
-        user = auth.currentUser as FirebaseUser
+        user = auth.currentUser
 
-        val moveFromLoginToVerifyEmail = requireArguments().getBoolean(Companion.MOVE_FROM_LOGIN_TO_VERIFIED_EMAIL, false)
+        var moveFromLoginToVerifyEmail = false
+        val bundle = arguments
+        if (bundle!=null){
+            moveFromLoginToVerifyEmail = bundle.getBoolean(Companion.MOVE_FROM_LOGIN_TO_VERIFIED_EMAIL, false)
+        }
+
         if (moveFromLoginToVerifyEmail) {
             binding.email.visibility = View.INVISIBLE
             binding.textTimer.visibility = View.GONE
@@ -58,9 +63,8 @@ class VerifiedEmailFragment : Fragment(), View.OnClickListener {
                 }
             }
             R.id.btnResendCode -> {
-                Log.i(Companion.TAG, "userVerified: ${user.isEmailVerified}")
 
-                user.sendEmailVerification().addOnSuccessListener {
+                user?.sendEmailVerification()?.addOnSuccessListener {
                     binding.textTimer.visibility = View.VISIBLE
                     binding.timer.visibility = View.VISIBLE
                     binding.btnResendCode.visibility = View.GONE
@@ -71,7 +75,7 @@ class VerifiedEmailFragment : Fragment(), View.OnClickListener {
                     ).show()
                     startTimer()
 
-                }.addOnFailureListener {
+                }?.addOnFailureListener {
                     Toast.makeText(
                         context,
                         "Resend verification failed. Please try again later",

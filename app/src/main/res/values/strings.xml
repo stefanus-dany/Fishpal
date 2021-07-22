@@ -68,7 +68,7 @@
     <string name="daftar_produk">Daftar Produk</string>
     <string name="profile">Profile</string>
     <string name="welcome">Welcome</string>
-    <string name="user_name">Bapak Budiawan</string>
+    <string name="user_name">User Name</string>
     <string name="akun">Akun</string>
     <string name="daftar_transaksi">Daftar Transaksi</string>
     <string name="transaksi_berlangsung">Transaksi Berlangsung</string>
@@ -82,6 +82,9 @@
     <string name="kota_asal">Kota asal</string>
     <string name="nama_lengkap">Nama lengkap</string>
     <string name="perbarui_profil">Perbarui Profil</string>
+    <string name="desc_thread">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam blandit sit mollis aliquet turpis augue tempus dictum. Id nec tortor neque bibendum ultrices. Egestas eu tortor hendrerit nascetur amet, malesuada eu.</string>
+    <string name="like">Like</string>
+    <string name="comment">Comment</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 

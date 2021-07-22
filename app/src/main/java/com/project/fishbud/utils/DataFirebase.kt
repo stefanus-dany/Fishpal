@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.project.fishbud.model.UserModel
+import com.project.fishbud.ui.main_ui.community.CommunityEntity
 import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
 import com.project.fishbud.ui.main_ui.marketplace.checkout.PaymentEntity
 import com.project.fishbud.ui.main_ui.profile.OrderFishermanEntity
@@ -140,6 +141,50 @@ object DataFirebase {
                             if (value != null) {
                                 data.add(value)
                                 Log.i("cekIkan", "data.add : $data")
+                            }
+                        }
+                        mutableData.value = data
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+                Log.i("cek_data", "getDataUser: $data")
+
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            handler.post {
+                // Update ui in main thread
+                bgthread = Thread()
+                bgthread?.start()
+            }
+        }
+
+        return mutableData
+    }
+
+    fun getDataThread(): LiveData<MutableList<CommunityEntity>> {
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser as FirebaseUser
+//        Log.i("cek_error", "masuk getDataUser: ")
+        val mutableData = MutableLiveData<MutableList<CommunityEntity>>()
+        val data = mutableListOf<CommunityEntity>()
+
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            // Simulate process in background thread
+            try {
+                val reference = FirebaseDatabase.getInstance().reference
+                    .child("Thread")
+                reference.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        data.clear()
+                        for (dataSnapshot: DataSnapshot in snapshot.children) {
+                            val value = dataSnapshot.getValue(CommunityEntity::class.java)
+                            if (value != null) {
+                                data.add(value)
                             }
                         }
                         mutableData.value = data

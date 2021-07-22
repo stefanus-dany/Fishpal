@@ -5,10 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CommunityEntity(
-    var idProduk : String = "",
-    var namaIkan : String = "",
-    var harga : Long = 0,
-    var tokoIkan : String = "",
-    var linkImage : String = "",
-    var userId : String = ""
+    var writerId : String = "",
+    var writerName : String = "",
+    var threadId : String = "",
+    var threadDesc : String = "",
+    var urlProfileImage : String = ""
 ) : Parcelable

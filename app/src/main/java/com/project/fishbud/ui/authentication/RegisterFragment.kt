@@ -157,7 +157,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
 
                 } else {
                     Toast.makeText(
-                        context, "Email has been registered.",
+                        requireContext(), "Email has been registered.",
                         Toast.LENGTH_SHORT
                     ).show()
                     binding.progressBar.visibility = View.INVISIBLE

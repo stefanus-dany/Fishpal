@@ -7,11 +7,11 @@ import com.project.fishbud.utils.DataFirebase
 
 class CommunityViewModel : ViewModel() {
 
-//    fun getDataIkanFromFirebase(): LiveData<MutableList<CommunityEntity>> {
-//        val mutableData = MutableLiveData<MutableList<CommunityEntity>>()
-//        DataFirebase.getDataIkan().observeForever {
-//            mutableData.value = it
-//        }
-//        return mutableData
-//    }
+    fun getDataThread(): LiveData<MutableList<CommunityEntity>> {
+        val mutableData = MutableLiveData<MutableList<CommunityEntity>>()
+        DataFirebase.getDataThread().observeForever {
+            mutableData.value = it
+        }
+        return mutableData
+    }
 }
