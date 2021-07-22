@@ -85,7 +85,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@drawable/bg_rounded_corner"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@mipmap/ic_launcher" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
