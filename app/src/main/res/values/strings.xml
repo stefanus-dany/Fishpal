@@ -92,6 +92,15 @@
     <string name="biaya_administrasi">Biaya Administrasi</string>
     <string name="biaya_admin">Biaya Admin 5% : %s</string>
     <string name="total_new_order">Total : %s</string>
+    <string name="buka_toko">Buka Toko</string>
+    <string name="masukkan_info_toko">Masukkan Info Toko</string>
+    <string name="nama_toko_anda">Nama toko anda</string>
+    <string name="kota_letak_toko_anda">Kota letak toko anda</string>
+    <string name="upload_foto_ktp">Upload Foto KTP</string>
+    <string name="foto_diri">Foto Diri</string>
+    <string name="daftar_sekarang">Daftar Sekarang</string>
+    <string name="anda_belum_mendaftarkan_toko_anda">Anda belum mendaftarkan toko anda</string>
+    <string name="buka_toko_sekarang">Buka Toko Sekarang</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 

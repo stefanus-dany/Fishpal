@@ -11,6 +11,7 @@ data class UserModel(
     var city : String = "",
     var birthday : String = "",
     var urlProfileImage : String = "",
-    var address : String = ""
+    var address : String = "",
+    var fisherman : String = "false"
 ) : Parcelable
 

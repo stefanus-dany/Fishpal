@@ -142,7 +142,8 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                         "",
                         "",
                         "",
-                        ""
+                        "",
+                        "false"
                     )
 
                     reference.setValue(value).addOnCompleteListener {

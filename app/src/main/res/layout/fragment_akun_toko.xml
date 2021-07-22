@@ -6,6 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ui.viewPager.AkunTokoFragment">
 
+    <ImageView
+        android:id="@+id/iv_kosong"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/akuntoko"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_kosong"
+        style="@style/formatFont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/main_margin"
+        android:drawablePadding="@dimen/main_margin"
+        android:gravity="center"
+        android:text="@string/anda_belum_mendaftarkan_toko_anda"
+        android:textSize="@dimen/main_fontSize"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_kosong" />
+
+    <Button
+        android:id="@+id/btn_bukaTokoSekarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/indent_margin"
+        android:layout_marginTop="@dimen/indent_margin"
+        android:layout_marginBottom="@dimen/bottomFabIndent"
+        android:background="@drawable/bg_field_button"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/buka_toko_sekarang"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_kosong" />
+
     <LinearLayout
         android:id="@+id/ll1"
         android:layout_width="match_parent"
@@ -13,11 +55,13 @@
         android:orientation="vertical"
         android:paddingHorizontal="40dp"
         android:paddingVertical="@dimen/indent_margin"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lay1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -53,7 +97,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
             <ImageView
-                android:id="@+id/logout"
+                android:id="@+id/logout_toko"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_logout_24"
@@ -64,6 +108,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lay2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -130,26 +175,19 @@
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:src="@drawable/bg_home_1"
         android:scaleX="-1"
+        android:src="@drawable/bg_home_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/indent_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--<Button-->
-    <!--android:id="@+id/btn_tambah_produk"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:text="Tambah Produk"-->
-    <!--android:textAllCaps="false" />-->
-
-    <!--<Button-->
-    <!--android:id="@+id/btn_pesanan_baru"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:text="Pesanan Baru"-->
-    <!--android:textAllCaps="false" />-->
