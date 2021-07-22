@@ -85,6 +85,9 @@
     <string name="desc_thread">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam blandit sit mollis aliquet turpis augue tempus dictum. Id nec tortor neque bibendum ultrices. Egestas eu tortor hendrerit nascetur amet, malesuada eu.</string>
     <string name="like">Like</string>
     <string name="comment">Comment</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="buat_utasan">Buat utasan</string>
+    <string name="desc_create_thread">Apa yang ada dalam pikiran Anda?</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 

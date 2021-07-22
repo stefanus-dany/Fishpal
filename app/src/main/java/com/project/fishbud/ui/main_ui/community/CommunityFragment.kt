@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentCommunityBinding
+import com.project.fishbud.ui.main_ui.community.create_thread.CreateThreadFragment
 
-class CommunityFragment : Fragment() {
+class CommunityFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentCommunityBinding
     private lateinit var viewModel: CommunityViewModel
@@ -36,6 +38,7 @@ class CommunityFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = this@CommunityFragment.adapter
         }
+        binding.fabAddThread.setOnClickListener(this)
         observeData()
     }
 
@@ -46,6 +49,23 @@ class CommunityFragment : Fragment() {
                 setdataThread(it)
                 notifyDataSetChanged()
             }
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.fab_addThread -> {
+                val createThreadFragment = CreateThreadFragment()
+                makeCurrentFragment(createThreadFragment)
+            }
+        }
+    }
+
+    private fun makeCurrentFragment(fragment : Fragment){
+        fragmentManager?.beginTransaction()?.apply {
+            replace(R.id.fl_main_ui, fragment)
+            addToBackStack(null)
+            commit()
         }
     }
 
