@@ -238,29 +238,55 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_delivery_price"
+                android:id="@+id/tv_admin_cost"
                 style="@style/formatFont.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/indent_margin"
                 android:layout_marginTop="@dimen/indent_margin"
                 android:layout_marginBottom="@dimen/main_margin"
-                android:text="@string/biaya_pengiriman"
+                android:text="@string/biaya_administrasi"
                 android:textSize="@dimen/main_fontSize"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll3" />
+
+            <TextView
+                android:id="@+id/admin_cost"
+                style="@style/formatFont.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/indent_margin"
+                android:layout_marginBottom="@dimen/main_margin"
+                android:text="@string/rp2000"
+                android:textSize="@dimen/main_fontSize"
+                app:layout_constraintEnd_toEndOf="@id/cart_price"
+                app:layout_constraintTop_toBottomOf="@id/ll3" />
+
+            <TextView
+                android:id="@+id/tv_delivery_price"
+                style="@style/formatFont.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/indent_margin"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/main_margin"
+                android:text="@string/biaya_pengiriman"
+                android:textSize="@dimen/main_fontSize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_admin_cost" />
+
 
             <TextView
                 android:id="@+id/delivery_price"
                 style="@style/formatFont.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/indent_margin"
-                android:layout_marginBottom="@dimen/main_margin"
+                android:layout_marginTop="@dimen/main_margin"
+                android:layout_marginEnd="@dimen/indent_margin"
                 android:text="@string/rp0"
                 android:textSize="@dimen/main_fontSize"
-                app:layout_constraintEnd_toEndOf="@id/cart_price"
-                app:layout_constraintTop_toBottomOf="@id/ll3" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/admin_cost" />
 
             <TextView
                 android:id="@+id/tv_cart_price"
@@ -285,6 +311,7 @@
                 android:textSize="@dimen/main_fontSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/delivery_price" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

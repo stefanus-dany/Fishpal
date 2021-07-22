@@ -64,6 +64,28 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/total"
+                    style="@style/formatFont.semibold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_margin"
+                    android:drawablePadding="@dimen/main_margin"
+                    android:gravity="center_vertical"
+                    android:text="@string/total_new_order"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/admin_cost"
+                    style="@style/formatFont.semibold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_margin"
+                    android:drawablePadding="@dimen/main_margin"
+                    android:gravity="center_vertical"
+                    android:text="@string/biaya_admin"
+                    android:textSize="20sp" />
+
+                <TextView
                     android:id="@+id/pendapatan"
                     style="@style/formatFont.semibold"
                     android:layout_width="match_parent"

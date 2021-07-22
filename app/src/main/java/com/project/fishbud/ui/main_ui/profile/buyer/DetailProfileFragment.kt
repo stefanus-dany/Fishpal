@@ -154,6 +154,7 @@ class DetailProfileFragment : Fragment(), View.OnClickListener {
         binding.progressBar.visibility = View.GONE
         Toast.makeText(context, "Profil berhasil diupdate!", Toast.LENGTH_SHORT)
             .show()
+        fragmentManager?.popBackStack()
     }
 
 

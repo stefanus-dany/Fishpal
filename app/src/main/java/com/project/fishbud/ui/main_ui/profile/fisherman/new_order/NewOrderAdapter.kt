@@ -42,7 +42,6 @@ class NewOrderAdapter(val mContext: Context, var mCallback: dataNewOrder) :
 
     override fun getItemCount(): Int = dataPembayaran.size
 
-
     class ViewHolder(
         private val binding: ItemNewOrderBinding,
         val mContext: Context,
@@ -54,8 +53,12 @@ class NewOrderAdapter(val mContext: Context, var mCallback: dataNewOrder) :
             with(binding) {
                 invoice.text = itemView.resources.getString(R.string.invoice, data.idPesanan)
                 produkName.text = data.namaIkan
+                total.text =
+                    itemView.resources.getString(R.string.total_new_order, formatRupiah(data.harga, 0))
+                val tmp = (data.harga * 0.05).toLong()
+                adminCost.text = "Biaya Admin (5%) : ${formatRupiah(tmp, 0)}"
                 pendapatan.text =
-                    itemView.resources.getString(R.string.pendapatan, formatRupiah(data.harga, 0))
+                    itemView.resources.getString(R.string.total_new_order, formatRupiah((data.harga - tmp), 0))
 
                 btnProsesSekarang.setOnClickListener {
                     val value = OrderFishermanEntity(

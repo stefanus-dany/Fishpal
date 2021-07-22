@@ -25,6 +25,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
     private var cartPrice: Long = 0
     private var deliveryPrice: Long = 0
     private var totalPrice: Long = 0
+    private var adminCost: Long = 2000
     private var isChecked = false
     private lateinit var viewModel: PaymentViewModel
     private var timeDate = ""
@@ -77,7 +78,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == R.id.rb_1) {
                 deliveryPrice = 22000
-                totalPrice = deliveryPrice + cartPrice
+                totalPrice = deliveryPrice + cartPrice + adminCost
                 binding.deliveryPrice.text = formatRupiah(deliveryPrice)
                 binding.hargaTotal.text = formatRupiah((totalPrice))
                 isChecked = true
@@ -86,7 +87,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
 
             if (checkedId == R.id.rb_2) {
                 deliveryPrice = 35000
-                totalPrice = deliveryPrice + cartPrice
+                totalPrice = deliveryPrice + cartPrice + adminCost
                 binding.deliveryPrice.text = formatRupiah(deliveryPrice)
                 binding.hargaTotal.text = formatRupiah((totalPrice))
                 isChecked = true
@@ -94,7 +95,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
             }
         }
 
-        binding.hargaTotal.text = formatRupiah((deliveryPrice + cartPrice))
+        binding.hargaTotal.text = formatRupiah((deliveryPrice + cartPrice + adminCost))
         binding.btnBack.setOnClickListener {
             fragmentManager?.popBackStack()
         }
