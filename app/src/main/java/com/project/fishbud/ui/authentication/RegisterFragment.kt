@@ -138,7 +138,11 @@ class RegisterFragment : Fragment(), View.OnClickListener {
                     val value = UserModel(
                         binding.etEmail.text.toString().trim(),
                         binding.etName.text.toString().trim(),
-                        user.uid
+                        user.uid,
+                        "",
+                        "",
+                        "",
+                        ""
                     )
 
                     reference.setValue(value).addOnCompleteListener {

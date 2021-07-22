@@ -76,6 +76,12 @@
     <string name="daftar_produkmu">Daftar Produkmu</string>
     <string name="penjualan">Penjualan</string>
     <string name="tambah">TAMBAH</string>
+    <string name="profil">Profil</string>
+    <string name="alamat_lengkap">Alamat lengkap</string>
+    <string name="tanggal_lahir">Tanggal lahir</string>
+    <string name="kota_asal">Kota asal</string>
+    <string name="nama_lengkap">Nama lengkap</string>
+    <string name="perbarui_profil">Perbarui Profil</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 

@@ -1,16 +1,13 @@
-package com.project.fishbud.model
+package com.project.fishbud.ui.main_ui.profile.buyer
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UserModel(
-    var email : String = "",
+data class DataProfileEntity(
     var name : String = "",
-    var id : String = "",
     var city : String = "",
     var birthday : String = "",
     var urlProfileImage : String = "",
     var address : String = ""
 ) : Parcelable
-

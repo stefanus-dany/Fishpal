@@ -22,12 +22,10 @@
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_image"
+                android:id="@+id/profile_image_user"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/profile"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +38,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="@string/welcome"
                 android:textSize="@dimen/main_fontSize"
-                app:layout_constraintStart_toEndOf="@id/profile_image"
+                app:layout_constraintStart_toEndOf="@id/profile_image_user"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

@@ -13,5 +13,5 @@ object Constants {
     const val DATA_TO_CART_FRAGMENT = "data_to_cart_fragment"
     const val CART_PRICE_TO_PAYMENT = "cart_price_to_payment"
     const val SAVE_TOTAL_HARGA = "save_total_harga"
-    const val DATA_TO_WAITING_PAYMENT = "data_to_waiting_payment"
+    const val DATA_TO_PROFILE = "data_to_profile"
 }
