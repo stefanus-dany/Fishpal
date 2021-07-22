@@ -1,5 +1,6 @@
 package com.project.fishbud.ui.main_ui.profile.buyer
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -40,25 +41,21 @@ class DetailProfileFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         storage = FirebaseStorage.getInstance().reference
         user = FirebaseAuth.getInstance().currentUser as FirebaseUser
-        val bundle: Bundle? = arguments
-        if (bundle != null) {
-            val data = bundle.getParcelable<DataProfileEntity>(Constants.DATA_TO_PROFILE)
-            if (data != null) {
-                with(data) {
-                    binding.etFullname.setText(name)
-                    binding.etCity.setText(city)
-                    binding.etBirthday.setText(birthday)
-                    binding.etAddress.setText(address)
-                    if (urlProfileImage != "") {
-                        context?.let {
-                            Glide.with(it)
-                                .load(urlProfileImage)
-                                .into(binding.profileImage)
-                        }
-                    }
+
+        val sharedPreferences = activity?.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        if (sharedPreferences != null) {
+            binding.etFullname.setText(sharedPreferences.getString(Constants.USER_NAME, ""))
+            binding.etCity.setText(sharedPreferences.getString(Constants.CITY_USER, ""))
+            binding.etBirthday.setText(sharedPreferences.getString(Constants.BIRTHDAY_USER, ""))
+            binding.etAddress.setText(sharedPreferences.getString(Constants.ADDRESS_USER, ""))
+            val url = sharedPreferences.getString(Constants.URL_PROFILE_IMAGE_USER, "")
+            if (url != "") {
+                context?.let {
+                    Glide.with(it)
+                        .load(url)
+                        .into(binding.profileImage)
                 }
             }
-
         }
         binding.btnUpdateProfile.setOnClickListener(this)
         binding.profileImage.setOnClickListener(this)

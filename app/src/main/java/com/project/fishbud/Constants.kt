@@ -14,4 +14,9 @@ object Constants {
     const val CART_PRICE_TO_PAYMENT = "cart_price_to_payment"
     const val SAVE_TOTAL_HARGA = "save_total_harga"
     const val DATA_TO_PROFILE = "data_to_profile"
+    const val USER_NAME = "user_name"
+    const val ADDRESS_USER = "address_user"
+    const val CITY_USER = "city_user"
+    const val BIRTHDAY_USER = "birthday_user"
+    const val URL_PROFILE_IMAGE_USER = "url_profile_image_user"
 }

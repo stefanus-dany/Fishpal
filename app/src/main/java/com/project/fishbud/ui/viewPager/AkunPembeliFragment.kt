@@ -1,21 +1,16 @@
 package com.project.fishbud.ui.viewPager
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.project.fishbud.Constants
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentAkunPembeliBinding
@@ -24,21 +19,18 @@ import com.project.fishbud.ui.main_ui.profile.buyer.DataProfileEntity
 import com.project.fishbud.ui.main_ui.profile.buyer.DetailProfileFragment
 import com.project.fishbud.ui.main_ui.profile.buyer.transaction.TransactionFragment
 import com.project.fishbud.ui.main_ui.profile.buyer.waiting_payment.WaitingPaymentFragment
-import java.util.concurrent.Executors
 
 class AkunPembeliFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentAkunPembeliBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var user: FirebaseUser
-    private var dataProfile : DataProfileEntity? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAkunPembeliBinding.inflate(layoutInflater, container, false)
-        getFromDatabase()
         return binding.root
     }
 
@@ -50,6 +42,37 @@ class AkunPembeliFragment : Fragment(), View.OnClickListener {
         binding.transaction.setOnClickListener(this)
         binding.logout.setOnClickListener(this)
         binding.profile.setOnClickListener(this)
+
+        val sharedPreferences = activity?.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
+        if (sharedPreferences != null) {
+            binding.userName.text = sharedPreferences.getString(Constants.USER_NAME, "")
+            val url = sharedPreferences.getString(Constants.URL_PROFILE_IMAGE_USER, "")
+            if (url != "") {
+                context?.let {
+                    Glide.with(it)
+                        .load(url)
+                        .into(binding.profileImageUser)
+                }
+            }
+        }
+
+        val bundle: Bundle? = arguments
+        if (bundle != null) {
+            val data = bundle.getParcelable<DataProfileEntity>(Constants.DATA_TO_PROFILE)
+            if (data != null) {
+                with(data) {
+                    binding.userName.text = name
+                    if (urlProfileImage != "") {
+                        context?.let {
+                            Glide.with(it)
+                                .load(urlProfileImage)
+                                .into(binding.profileImageUser)
+                        }
+                    }
+                }
+            }
+
+        }
     }
 
     private fun makeCurrentFragment(fragment: Fragment) {
@@ -82,46 +105,13 @@ class AkunPembeliFragment : Fragment(), View.OnClickListener {
 
             R.id.profile -> {
                 val detailProfileFragment = DetailProfileFragment()
-                val bundle = Bundle()
-                bundle.putParcelable(Constants.DATA_TO_PROFILE, dataProfile)
-                detailProfileFragment.arguments = bundle
+//                val bundle = Bundle()
+//                bundle.putParcelable(Constants.DATA_TO_PROFILE, dataProfile)
+//                detailProfileFragment.arguments = bundle
                 makeCurrentFragment(detailProfileFragment)
             }
         }
     }
 
-    private fun getFromDatabase(){
-        val executor = Executors.newSingleThreadExecutor()
-        val handler = Handler(Looper.getMainLooper())
-        executor.execute {
-            // Simulate process in background thread
-            try {
-                val reference = FirebaseDatabase.getInstance().reference.child("Users")
-                    .child(user.uid)
-                reference.addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val value = snapshot.getValue(DataProfileEntity::class.java)
-                        if (value != null) {
-                            with(value) {
-                                dataProfile = DataProfileEntity(
-                                    name, city, birthday, urlProfileImage, address
-                                )
-                            }
-                        }
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Toast.makeText(context, "Error get data from database", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                })
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-            }
-            handler.post {
-
-            }
-        }
-    }
 
 }
