@@ -127,6 +127,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         executor.execute {
             // Simulate process in background thread
             try {
+                auth = FirebaseAuth.getInstance()
+                user = auth.currentUser as FirebaseUser
                 val reference = FirebaseDatabase.getInstance().reference.child("Users")
                     .child(user.uid)
                 reference.addValueEventListener(object : ValueEventListener {
