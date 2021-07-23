@@ -88,11 +88,12 @@
             <TextView
                 android:id="@+id/fisherman_name"
                 style="@style/formatFont.semibold"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/user_name"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/logout_toko"
                 app:layout_constraintStart_toStartOf="@+id/welcome"
                 app:layout_constraintTop_toBottomOf="@+id/welcome" />
 

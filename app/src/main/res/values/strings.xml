@@ -84,6 +84,7 @@
     <string name="nama_lengkap">Nama lengkap</string>
     <string name="perbarui_profil">Perbarui Profil</string>
     <string name="desc_thread">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam blandit sit mollis aliquet turpis augue tempus dictum. Id nec tortor neque bibendum ultrices. Egestas eu tortor hendrerit nascetur amet, malesuada eu.</string>
+    <string name="desc_thread_mini">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="like">Like</string>
     <string name="comment">Comment</string>
     <string name="bagikan">Bagikan</string>

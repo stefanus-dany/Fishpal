@@ -3,6 +3,8 @@ package com.project.fishbud.ui.main_ui.profile.fisherman.tambahProduk
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentTambahProdukBinding
+import java.util.concurrent.Executors
 
 class TambahProdukFragment : Fragment(), View.OnClickListener {
 
@@ -90,18 +93,30 @@ class TambahProdukFragment : Fragment(), View.OnClickListener {
                     userId = it[0].id
 
                     //store data to database
-                    viewModel.uploadPicture(
-                        namaUser,
-                        binding.etNamaIkan.text.toString().trim(),
-                        binding.etHargaIkan.text.toString().trim().toInt(),
-                        uriImage!!,
-                        userId
-                    )
+                    val executor = Executors.newSingleThreadExecutor()
+                    val handler = Handler(Looper.getMainLooper())
+                    executor.execute {
+                        // Simulate process in background thread
+                        try {
+                            viewModel.uploadPicture(
+                                namaUser,
+                                binding.etNamaIkan.text.toString().trim(),
+                                binding.etHargaIkan.text.toString().trim().toInt(),
+                                uriImage!!,
+                                userId
+                            )
+                        } catch (e: InterruptedException) {
+                            e.printStackTrace()
+                        }
+                        handler.post {
+                            // Update ui in main thread
+                            fragmentManager?.popBackStack()
+                            binding.progressBar.visibility = View.GONE
+                        }
+                    }
 
-                    fragmentManager?.popBackStack()
+
                 })
-
-                binding.progressBar.visibility = View.GONE
             }
         }
     }

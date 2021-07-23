@@ -20,12 +20,13 @@ import com.project.fishbud.Constants
 import com.project.fishbud.R
 import com.project.fishbud.databinding.ActivityMainBinding
 import com.project.fishbud.ui.main_ui.community.CommunityFragment
+import com.project.fishbud.ui.main_ui.home.HomeFragment
 import com.project.fishbud.ui.main_ui.marketplace.MarketplaceFragment
 import com.project.fishbud.ui.main_ui.profile.ProfileFragment
 import com.project.fishbud.ui.main_ui.profile.buyer.DataProfileEntity
 import java.util.concurrent.Executors
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onClickHome {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.bottomNavigationView.menu.getItem(2).isEnabled = false
         auth = FirebaseAuth.getInstance()
 
-        val home = HomeFragment()
+        val home = HomeFragment(this)
         val marketplace = MarketplaceFragment()
         val community = CommunityFragment()
         val profile = ProfileFragment()
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun makeCurrentFragment(fragment: Fragment) {
+    fun makeCurrentFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_main_ui, fragment)
             commit()
@@ -111,7 +112,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 this.supportFragmentManager.findFragmentById(R.id.fl_main_ui)
             (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
                 Log.i("cekcek", "onBackPressed: ")
-                makeCurrentFragment(HomeFragment())
+                makeCurrentFragment(HomeFragment(this))
                 binding.bottomNavigationView.selectedItemId = R.id.bnv_home
             }
         }
@@ -162,6 +163,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             handler.post {
 
             }
+        }
+    }
+
+    override fun onClickHome(value: Boolean) {
+        if (value){
+            binding.bottomNavigationView.selectedItemId = R.id.bnv_marketplace
+            makeCurrentFragment(MarketplaceFragment())
+        } else {
+            binding.bottomNavigationView.selectedItemId = R.id.bnv_community
+            makeCurrentFragment(CommunityFragment())
         }
     }
 

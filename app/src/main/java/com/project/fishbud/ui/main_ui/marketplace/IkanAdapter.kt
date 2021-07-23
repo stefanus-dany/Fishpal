@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.project.fishbud.OnItemClick
 import com.project.fishbud.R
 import com.project.fishbud.databinding.ItemIkanBinding
@@ -19,8 +18,8 @@ import java.util.*
 import java.util.concurrent.Executors
 import kotlin.collections.ArrayList
 
-
-class IkanAdapter(mContext: Context, onItemClick: OnItemClick) : RecyclerView.Adapter<IkanAdapter.CourseViewHolder>() {
+class IkanAdapter(mContext: Context, onItemClick: OnItemClick) :
+    RecyclerView.Adapter<IkanAdapter.CourseViewHolder>() {
     private var dataIkan = ArrayList<IkanEntity>()
     private val mCallback = onItemClick
 
@@ -44,7 +43,11 @@ class IkanAdapter(mContext: Context, onItemClick: OnItemClick) : RecyclerView.Ad
     override fun getItemCount(): Int = dataIkan.size
 
 
-    class CourseViewHolder(private val binding: ItemIkanBinding, val mContext: Context, val mCallback : OnItemClick) :
+    class CourseViewHolder(
+        private val binding: ItemIkanBinding,
+        val mContext: Context,
+        val mCallback: OnItemClick
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
         private var bgthread: Thread? = null
@@ -85,7 +88,8 @@ class IkanAdapter(mContext: Context, onItemClick: OnItemClick) : RecyclerView.Ad
                             bgthread?.start()
                             addToCart.background =
                                 ContextCompat.getDrawable(mContext, R.drawable.bg_cart)
-                            Toast.makeText(mContext, "Ditambahkan ke keranjang", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, "Ditambahkan ke keranjang", Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
                     mCallback.onClick(dataIkanToCart)

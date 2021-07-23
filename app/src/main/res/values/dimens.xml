@@ -6,4 +6,7 @@
     <dimen name="mini_fontSize">14sp</dimen>
     <dimen name="bottomFab">60dp</dimen>
     <dimen name="bottomFabIndent">80dp</dimen>
+    <dimen name="minHeightDescTwoLine">75dp</dimen>
+    <dimen name="minHeightNameTwoLine">45dp</dimen>
+    <dimen name="minHeightHomeToko">45dp</dimen>
 </resources>
