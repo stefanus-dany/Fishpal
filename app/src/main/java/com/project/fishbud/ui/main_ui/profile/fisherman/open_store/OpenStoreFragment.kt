@@ -140,7 +140,6 @@ class OpenStoreFragment : Fragment(), View.OnClickListener {
                         ).show()
                         binding.progressBar.visibility = View.GONE
                         fragmentManager?.popBackStack()
-                        fragmentManager?.popBackStack()
 
                     } else {
                         Toast.makeText(context, "Error from database", Toast.LENGTH_SHORT).show()

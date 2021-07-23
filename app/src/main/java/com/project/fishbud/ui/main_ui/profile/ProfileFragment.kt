@@ -46,4 +46,5 @@ class ProfileFragment : Fragment(), MainActivity.IOnBackPressed{
     override fun onBackPressed(): Boolean {
         return false
     }
+
 }
