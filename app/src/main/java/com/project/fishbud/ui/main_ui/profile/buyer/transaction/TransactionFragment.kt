@@ -36,6 +36,10 @@ class TransactionFragment : Fragment() {
             adapter = this@TransactionFragment.adapter
         }
 
+        binding.btnBack.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
+
         observeData()
     }
 

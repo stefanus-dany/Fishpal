@@ -46,6 +46,9 @@ class MyProductFragment : Fragment(), View.OnClickListener{
         }
         observeData()
         binding.btnAddProduct.setOnClickListener(this)
+        binding.btnBack.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
     }
 
     private fun makeCurrentFragment(fragment: Fragment) {

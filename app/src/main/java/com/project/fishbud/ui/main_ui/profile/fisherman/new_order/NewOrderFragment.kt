@@ -38,7 +38,12 @@ class NewOrderFragment : Fragment(), NewOrderAdapter.dataNewOrder {
             adapter = this@NewOrderFragment.adapter
         }
 
+        binding.btnBack.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
+
         observeData()
+
     }
 
     private fun observeData() {

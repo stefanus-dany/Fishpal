@@ -49,6 +49,9 @@ class OpenStoreFragment : Fragment(), View.OnClickListener {
         binding.btnDaftarSekarang.setOnClickListener(this)
         binding.btnUploadKtp.setOnClickListener(this)
         binding.btnUploadFotodiri.setOnClickListener(this)
+        binding.btnBack.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
 
     }
 
