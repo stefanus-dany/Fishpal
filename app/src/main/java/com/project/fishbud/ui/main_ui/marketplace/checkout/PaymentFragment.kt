@@ -155,6 +155,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                         binding.etPayment.text.toString().trim(),
                         jenisPengiriman,
                         totalPrice,
+                        cartPrice,
                         timeDate,
                         date,
                         dataIkan

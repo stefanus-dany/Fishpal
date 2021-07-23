@@ -34,6 +34,7 @@ class PaymentViewModel : ViewModel() {
         kartuKredit: String,
         jenisPengiriman: String,
         totalHarga: Long,
+        netPrice : Long,
         timeDate: String,
         date: String,
         dataIkan: ArrayList<IkanEntity>?
@@ -49,6 +50,7 @@ class PaymentViewModel : ViewModel() {
             alamat,
             kartuKredit,
             jenisPengiriman,
+            netPrice,
             totalHarga,
             timeDate,
             date

@@ -12,6 +12,7 @@ data class WaitingPaymentEntity(
     var kartuKredit : String = "",
     var jenisPengiriman : String = "",
     var totalHarga : Long = 0,
+    var netPrice : Long = 0,
     var date : String = "",
     var timeDate : String = "",
     var dataIkan : String = "",

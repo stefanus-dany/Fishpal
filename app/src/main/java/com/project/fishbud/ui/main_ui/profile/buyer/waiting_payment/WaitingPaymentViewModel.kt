@@ -45,6 +45,7 @@ class WaitingPaymentViewModel : ViewModel() {
         kartuKredit: String,
         jenisPengiriman: String,
         totalHarga: Long,
+        netPrice: Long,
         date: String,
         payBefore: String,
         dataIkan: String,
@@ -57,7 +58,6 @@ class WaitingPaymentViewModel : ViewModel() {
             val nelayanId = data.nelayanId
             val idProduk = data.idPesanan
             val namaIkan = data.namaIkan
-            val harga = data.harga
             val linkImage = data.linkImage
             val tokoIkan = data.tokoIkan
 
@@ -71,7 +71,7 @@ class WaitingPaymentViewModel : ViewModel() {
                 nelayanId,
                 idProduk,
                 namaIkan,
-                harga,
+                netPrice,
                 linkImage,
                 tokoIkan,
                 idPembayaran

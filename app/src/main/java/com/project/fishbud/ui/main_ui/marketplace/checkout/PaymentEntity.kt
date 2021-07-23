@@ -11,6 +11,7 @@ data class PaymentEntity(
     var alamat : String = "",
     var kartuKredit : String = "",
     var jenisPengiriman : String = "",
+    var netPrice : Long = 0,
     var totalHarga : Long = 0,
     var timeDate : String = "",
     var date : String = "",

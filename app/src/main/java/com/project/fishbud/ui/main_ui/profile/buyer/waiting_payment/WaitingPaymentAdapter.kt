@@ -65,6 +65,7 @@ class WaitingPaymentAdapter(val mContext: Context, var mCallback: dataWaitingPay
                         data.kartuKredit,
                         data.jenisPengiriman,
                         data.totalHarga,
+                        data.netPrice,
                         data.date,
                         dt
                     )

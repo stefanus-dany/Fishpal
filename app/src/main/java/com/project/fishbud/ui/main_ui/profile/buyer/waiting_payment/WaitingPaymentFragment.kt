@@ -1,6 +1,7 @@
 package com.project.fishbud.ui.main_ui.profile.buyer.waiting_payment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,6 +69,8 @@ class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPaym
             val kartuKredit: String = kartuKredit
             val jenisPengiriman: String = jenisPengiriman
             val totalHarga: Long = totalHarga
+            val netPrice: Long = netPrice
+            Log.i("totharga", "totalharga: $totalHarga")
             val timePurchase: String = date
             val payBefore: String = timeDate
             val dataIkan : String = dataIkan
@@ -82,6 +85,7 @@ class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPaym
                     kartuKredit,
                     jenisPengiriman,
                     totalHarga,
+                    netPrice,
                     timePurchase,
                     payBefore,
                     dataIkan,

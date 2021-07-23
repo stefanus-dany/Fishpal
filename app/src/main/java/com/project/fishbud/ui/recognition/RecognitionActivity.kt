@@ -62,6 +62,9 @@ class RecognitionActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnTakePhoto.setOnClickListener(this)
         binding.btnFlashlight.setOnClickListener(this)
         binding.selectImage.setOnClickListener(this)
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
 
     }
 
