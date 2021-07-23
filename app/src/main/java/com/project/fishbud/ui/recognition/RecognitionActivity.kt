@@ -34,6 +34,7 @@ class RecognitionActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityRecognitionBinding
     private var imageCapture: ImageCapture? = null
     private lateinit var bitmap: Bitmap
+    private var uriImage: Uri? = null
     private lateinit var outputDirectory: File
     private lateinit var labels: List<String>
     private var max: Int = 0
@@ -219,12 +220,13 @@ class RecognitionActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val uri: Uri? = data?.data
-        bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+        uriImage = data?.data
+        bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uriImage)
         //mendapatkan hasil prediksi dari gambar yang telah discan
         getPrediction(bitmap)
         val move = Intent(this@RecognitionActivity, InfoScanActivity::class.java)
         move.putExtra(Constants.RESULT_PREDICTION_TEXT, labels[max])
+        move.putExtra(Constants.URI_RESULT_SCAN, uriImage)
         startActivity(move)
     }
 

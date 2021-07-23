@@ -16,6 +16,7 @@ import com.project.fishbud.ui.main_ui.community.CommunityEntity
 import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
 import com.project.fishbud.ui.main_ui.marketplace.checkout.PaymentEntity
 import com.project.fishbud.ui.main_ui.profile.OrderFishermanEntity
+import com.project.fishbud.ui.recognition.InfoScanEntity
 import java.util.concurrent.Executors
 
 object DataFirebase {
@@ -232,6 +233,45 @@ object DataFirebase {
                             if (value != null) {
                                 data.add(value)
                             }
+                        }
+                        mutableData.value = data
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+                Log.i("cek_data", "getDataUser: $data")
+
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            handler.post {
+                // Update ui in main thread
+                bgthread = Thread()
+                bgthread?.start()
+            }
+        }
+
+        return mutableData
+    }
+
+    fun getDataInfoScan(fish: String): LiveData<MutableList<InfoScanEntity>> {
+        val mutableData = MutableLiveData<MutableList<InfoScanEntity>>()
+        val data = mutableListOf<InfoScanEntity>()
+
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            // Simulate process in background thread
+            try {
+                val reference = FirebaseDatabase.getInstance().reference.child("ListIkan")
+                    .child(fish)
+                reference.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        data.clear()
+                        val value = snapshot.getValue(InfoScanEntity::class.java)
+                        if (value != null) {
+                            data.add(value)
                         }
                         mutableData.value = data
                     }
