@@ -1,6 +1,5 @@
 package com.project.fishbud.ui.main_ui.home
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,6 @@ class HomeFragment(onClickHome: onClickHome) : Fragment(), View.OnClickListener 
     private lateinit var viewModelCommunity: CommunityViewModel
     private lateinit var communityAdapter: CommunityHomeAdapter
     private val mCallback = onClickHome
-    private var cekGetData = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +74,7 @@ class HomeFragment(onClickHome: onClickHome) : Fragment(), View.OnClickListener 
             with(communityAdapter) {
                 if (it.isNotEmpty()) {
                     setdataThread(it)
-                    with(binding){
+                    with(binding) {
                         tvToko.visibility = View.VISIBLE
                         arrowToko.visibility = View.VISIBLE
                         rvTokoHome.visibility = View.VISIBLE

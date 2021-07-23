@@ -1,6 +1,7 @@
 package com.project.fishbud.ui.main_ui
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
@@ -24,6 +25,7 @@ import com.project.fishbud.ui.main_ui.home.HomeFragment
 import com.project.fishbud.ui.main_ui.marketplace.MarketplaceFragment
 import com.project.fishbud.ui.main_ui.profile.ProfileFragment
 import com.project.fishbud.ui.main_ui.profile.buyer.DataProfileEntity
+import com.project.fishbud.ui.recognition.RecognitionActivity
 import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onClickHome {
@@ -82,7 +84,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
         when (v?.id) {
 
             R.id.detection -> {
-
+                startActivity(Intent(this, RecognitionActivity::class.java))
             }
         }
     }

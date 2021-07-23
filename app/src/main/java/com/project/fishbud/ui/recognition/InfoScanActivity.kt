@@ -19,5 +19,8 @@ class InfoScanActivity : AppCompatActivity() {
         resultPredictionText = intent.getStringExtra(Constants.RESULT_PREDICTION_TEXT)
 
         binding.titleInfoscan.text = resultPredictionText
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 }
