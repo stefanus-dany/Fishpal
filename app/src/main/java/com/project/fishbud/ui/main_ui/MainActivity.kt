@@ -34,11 +34,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
     private lateinit var auth: FirebaseAuth
     private lateinit var user: FirebaseUser
     private val TAG = "check"
+    private lateinit var searchQueryFromInfoScan: String
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate: ")
+        searchQueryFromInfoScan =
+            intent.getStringExtra(Constants.DATA_SEARCH_FROM_INFOSCAN_TO_MAIN).toString()
+        Log.i(TAG, "cekSearchQuery: $searchQueryFromInfoScan")
         sharedPreferences = getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
         binding = ActivityMainBinding.inflate(layoutInflater)
         getFromDatabase()
@@ -54,7 +58,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
         val community = CommunityFragment()
         val profile = ProfileFragment()
 
-        makeCurrentFragment(home)
+        if (searchQueryFromInfoScan=="null") {
+            makeCurrentFragment(home)
+        } else {
+            val bundle = Bundle()
+            bundle.putString(Constants.DATA_SEARCH_FROM_MAIN_TO_MARKETPLACE, searchQueryFromInfoScan)
+            marketplace.arguments = bundle
+            binding.bottomNavigationView.selectedItemId = R.id.bnv_marketplace
+            makeCurrentFragment(marketplace)
+        }
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -169,7 +181,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
     }
 
     override fun onClickHome(value: Boolean) {
-        if (value){
+        if (value) {
             binding.bottomNavigationView.selectedItemId = R.id.bnv_marketplace
             makeCurrentFragment(MarketplaceFragment())
         } else {

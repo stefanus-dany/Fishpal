@@ -27,7 +27,7 @@
     <string name="community">Community</string>
     <string name="you_re_in_jakarta">You\'re in <b>Jakarta</b></string>
     <string name="ukuran_maksimum">Ukuran</string>
-    <string name="perkiraan_nusia">Usia\nMaksimum</string>
+    <string name="perkiraan_nusia">Usia Maksimum</string>
     <string name="info_scan">Info Scan</string>
     <string name="toko">Toko</string>
     <string name="tambah_produk">Tambah Produk</string>
@@ -103,6 +103,7 @@
     <string name="anda_belum_mendaftarkan_toko_anda">Anda belum mendaftarkan toko anda</string>
     <string name="buka_toko_sekarang">Buka Toko Sekarang</string>
     <string name="max_umur">Max Umur</string>
+    <string name="cari_di_toko">Cari di Toko</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 

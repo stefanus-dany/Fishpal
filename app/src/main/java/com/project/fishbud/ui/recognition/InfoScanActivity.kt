@@ -1,13 +1,16 @@
 package com.project.fishbud.ui.recognition
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.project.fishbud.Constants
 import com.project.fishbud.databinding.ActivityInfoScanBinding
+import com.project.fishbud.ui.main_ui.MainActivity
 
 class InfoScanActivity : AppCompatActivity() {
 
@@ -31,6 +34,13 @@ class InfoScanActivity : AppCompatActivity() {
 
         binding.btnBack.setOnClickListener {
             finish()
+        }
+        binding.btnCariDiToko.setOnClickListener {
+            val split = resultPredictionText?.split("Ikan ")?.toTypedArray()
+            Log.i("check", "cekSplit: ${split?.get(1)}")
+            val move = Intent(this, MainActivity::class.java)
+            move.putExtra(Constants.DATA_SEARCH_FROM_INFOSCAN_TO_MAIN, split?.get(1))
+            startActivity(move)
         }
     }
 

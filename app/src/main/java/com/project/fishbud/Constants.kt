@@ -19,4 +19,6 @@ object Constants {
     const val CITY_USER = "city_user"
     const val BIRTHDAY_USER = "birthday_user"
     const val URL_PROFILE_IMAGE_USER = "url_profile_image_user"
+    const val DATA_SEARCH_FROM_INFOSCAN_TO_MAIN = "data_search"
+    const val DATA_SEARCH_FROM_MAIN_TO_MARKETPLACE = "data_marketplace"
 }

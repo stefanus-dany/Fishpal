@@ -8,7 +8,7 @@ import com.project.fishbud.utils.DataFirebase
 
 class IkanViewModel : ViewModel() {
 
-    private val dataCart = MutableLiveData<MutableList<IkanEntity>>()
+    private val displaySearch = MutableLiveData<MutableList<IkanEntity>>()
 
     fun getDataIkanFromFirebase(): LiveData<MutableList<IkanEntity>> {
         val mutableData = MutableLiveData<MutableList<IkanEntity>>()

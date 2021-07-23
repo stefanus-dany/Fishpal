@@ -18,16 +18,21 @@ import java.util.*
 import java.util.concurrent.Executors
 import kotlin.collections.ArrayList
 
-class IkanAdapter(mContext: Context, onItemClick: OnItemClick) :
+class IkanAdapter(mContext: Context, onItemClick: OnItemClick, val dataIkan: MutableList<IkanEntity>) :
     RecyclerView.Adapter<IkanAdapter.CourseViewHolder>() {
-    private var dataIkan = ArrayList<IkanEntity>()
+//    private var dataIkan = ArrayList<IkanEntity>()
     private val mCallback = onItemClick
 
-    fun setdataIkan(data: List<IkanEntity>?) {
-        if (data == null) return
-        this.dataIkan.clear()
-        this.dataIkan.addAll(data)
-    }
+//    init {
+//        setdataIkan(data)
+//    }
+
+//    fun setdataIkan(data: List<IkanEntity>?) {
+//        if (data == null) return
+//        this.dataIkan.clear()
+//        this.dataIkan.addAll(data)
+//        Log.i("lowk", "dataIkan: $dataIkan")
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         val itemIkanBinding =
@@ -36,6 +41,7 @@ class IkanAdapter(mContext: Context, onItemClick: OnItemClick) :
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
+        dataIkan.distinct()
         val data = dataIkan[position]
         holder.bind(data)
     }

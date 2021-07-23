@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/indent_margin"
                         android:gravity="center"
-                        android:text="Gurame"
+                        tools:text="@string/user_name"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +121,7 @@
                         android:layout_marginTop="@dimen/indent_margin"
                         android:gravity="center"
                         style="@style/formatFont.bold"
-                        android:text="@string/ukuran_maksimum"
+                        tools:text="@string/ukuran_maksimum"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toStartOf="@+id/age"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/indent_margin"
                         android:gravity="center"
-                        android:text="@string/max_umur"
+                        tools:text="@string/max_umur"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -187,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_light"
                         android:gravity="center"
-                        android:text="Kalori, Protein, Karbohidrat, Sodium, Kolesterol, Lemak, Kalsium, Zat besi, Potasium, Vitamin A, Vitamin C"
+                        tools:text="Kalori, Protein, Karbohidrat, Sodium, Kolesterol, Lemak, Kalsium, Zat besi, Potasium, Vitamin A, Vitamin C"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -229,6 +229,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
+                    android:id="@+id/btn_cariDiToko"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/indent_margin"
@@ -236,7 +237,7 @@
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/bg_field_button"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Cari di Toko"
+                    android:text="@string/cari_di_toko"
                     android:textAllCaps="false" />
 
             </LinearLayout>
