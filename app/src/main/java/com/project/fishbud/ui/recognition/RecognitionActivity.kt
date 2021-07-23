@@ -35,7 +35,6 @@ class RecognitionActivity : AppCompatActivity(), View.OnClickListener {
     private var imageCapture: ImageCapture? = null
     private lateinit var bitmap: Bitmap
     private lateinit var outputDirectory: File
-
     private lateinit var labels: List<String>
     private var max: Int = 0
 
@@ -62,7 +61,6 @@ class RecognitionActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.btnTakePhoto.setOnClickListener(this)
         binding.btnFlashlight.setOnClickListener(this)
-
         binding.selectImage.setOnClickListener(this)
 
     }
