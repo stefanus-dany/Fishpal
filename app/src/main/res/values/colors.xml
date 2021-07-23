@@ -21,4 +21,5 @@
     <color name="text_blue">#146A7D</color>
     <color name="blue_semidark">#91C0D4</color>
     <color name="read_more_text">#987F2E</color>
+    <color name="splash_background">#91C0D4</color>
 </resources>
