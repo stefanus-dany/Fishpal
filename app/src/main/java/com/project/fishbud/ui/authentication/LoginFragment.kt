@@ -27,7 +27,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
-    private var user: FirebaseUser? = null
+    private lateinit var user: FirebaseUser
     private lateinit var sharedPreferences: SharedPreferences
     private var moveFromVerifiedEmailToLogin = false
 
@@ -42,8 +42,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
-        user = auth.currentUser
-        Log.i("cekauth", "cek Auth: $user")
         sharedPreferences = this.activity?.getSharedPreferences(
             "sharedPrefs",
             Context.MODE_PRIVATE
@@ -115,14 +113,14 @@ class LoginFragment : Fragment(), View.OnClickListener {
             binding.etPassword.text.toString().trim()
         )
             .addOnCompleteListener(AuthenticationActivity()) { task ->
+                user = auth.currentUser as FirebaseUser
                 if (task.isSuccessful) {
                     //get user
-                    if (user?.isEmailVerified == true) {
-                        val reference = user?.uid?.let {
+                    if (user.isEmailVerified) {
+                        val reference =
                             FirebaseDatabase.getInstance().reference.child("Users")
-                                .child(it)
-                        }
-                        reference?.addValueEventListener(object : ValueEventListener {
+                                .child(user.uid)
+                        reference.addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 binding.progressBar.visibility = View.INVISIBLE
                                 val user = auth.currentUser
