@@ -71,6 +71,7 @@
     <string name="profile">Profile</string>
     <string name="welcome">Welcome</string>
     <string name="user_name">User Name</string>
+    <string name="dateTime">05 Jan 2021, 10:20:21</string>
     <string name="akun">Akun</string>
     <string name="daftar_transaksi">Daftar Transaksi</string>
     <string name="transaksi_berlangsung">Transaksi Berlangsung</string>

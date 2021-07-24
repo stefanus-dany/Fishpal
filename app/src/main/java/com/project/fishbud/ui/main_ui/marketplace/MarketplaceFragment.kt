@@ -1,5 +1,6 @@
 package com.project.fishbud.ui.main_ui.marketplace
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -20,14 +22,14 @@ import com.project.fishbud.Constants
 import com.project.fishbud.OnItemClick
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentMarketplaceNewBinding
-import com.project.fishbud.ui.main_ui.MainActivity
+import com.project.fishbud.ui.authentication.AuthenticationActivity
 import com.project.fishbud.ui.main_ui.marketplace.cart.CartFragment
 import java.util.*
 import java.util.concurrent.Executors
 import kotlin.collections.ArrayList
 
 
-class MarketplaceFragment : Fragment(), OnItemClick{
+class MarketplaceFragment : Fragment(), OnItemClick {
 
     private lateinit var binding: FragmentMarketplaceNewBinding
 
@@ -37,6 +39,7 @@ class MarketplaceFragment : Fragment(), OnItemClick{
     private lateinit var data: MutableList<IkanEntity>
     private lateinit var displayData: MutableList<IkanEntity>
     private lateinit var searchQueryFromInfoScan: String
+    private var user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,34 +51,7 @@ class MarketplaceFragment : Fragment(), OnItemClick{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        data = mutableListOf()
-        displayData = mutableListOf()
-        getDataSearchFromInfoScan()
-        read()
-//        viewModel = ViewModelProvider(
-//            requireActivity(),
-//            ViewModelProvider.NewInstanceFactory()
-//        )[IkanViewModel::class.java]
-        ikanAdapter = IkanAdapter(requireContext(), this, displayData)
-//        observeData()
-//        ikanAdapter.setdataIkan(data)
-        with(binding.rvMarketplace) {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ikanAdapter
-        }
-        search()
 
-        binding.cart.setOnClickListener {
-            val cartFragment = CartFragment()
-            //store data ikan to cart
-            val bundle = Bundle()
-            val distinct = ikanEntity.distinct()
-            val arrayList: ArrayList<IkanEntity> = ArrayList(distinct)
-            bundle.putParcelableArrayList(Constants.DATA_TO_CART_VALUE, arrayList)
-            Log.i("cio", "cek dataIkan di marketplace : $arrayList")
-            cartFragment.arguments = bundle
-            makeCurrentFragment(cartFragment)
-        }
     }
 
     private fun getDataSearchFromInfoScan() {
@@ -109,9 +85,9 @@ class MarketplaceFragment : Fragment(), OnItemClick{
             replace(R.id.fl_main_ui, fragment)
             addToBackStack(null)
             commit()
-            val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+            val navBar: BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
             navBar?.visibility = View.GONE
-            val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+            val scan: FloatingActionButton? = activity?.findViewById(R.id.detection)
             scan?.visibility = View.GONE
         }
     }
@@ -210,10 +186,43 @@ class MarketplaceFragment : Fragment(), OnItemClick{
     }
 
     override fun onResume() {
-        val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+        val navBar: BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
         navBar?.visibility = View.VISIBLE
-        val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+        val scan: FloatingActionButton? = activity?.findViewById(R.id.detection)
         scan?.visibility = View.VISIBLE
+
+        data = mutableListOf()
+        displayData = mutableListOf()
+        getDataSearchFromInfoScan()
+        read()
+//        viewModel = ViewModelProvider(
+//            requireActivity(),
+//            ViewModelProvider.NewInstanceFactory()
+//        )[IkanViewModel::class.java]
+        ikanAdapter = IkanAdapter(requireContext(), this, displayData)
+//        observeData()
+//        ikanAdapter.setdataIkan(data)
+        with(binding.rvMarketplace) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = ikanAdapter
+        }
+        search()
+
+        binding.cart.setOnClickListener {
+            if (user != null) {
+                val cartFragment = CartFragment()
+                //store data ikan to cart
+                val bundle = Bundle()
+                val distinct = ikanEntity.distinct()
+                val arrayList: ArrayList<IkanEntity> = ArrayList(distinct)
+                bundle.putParcelableArrayList(Constants.DATA_TO_CART_VALUE, arrayList)
+                Log.i("cio", "cek dataIkan di marketplace : $arrayList")
+                cartFragment.arguments = bundle
+                makeCurrentFragment(cartFragment)
+            } else {
+                context?.startActivity(Intent(context, AuthenticationActivity::class.java))
+            }
+        }
         super.onResume()
     }
 

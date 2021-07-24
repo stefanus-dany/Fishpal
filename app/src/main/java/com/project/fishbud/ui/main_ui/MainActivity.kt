@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import com.project.fishbud.Constants
 import com.project.fishbud.R
 import com.project.fishbud.databinding.ActivityMainBinding
+import com.project.fishbud.ui.authentication.AuthenticationActivity
 import com.project.fishbud.ui.main_ui.community.CommunityFragment
 import com.project.fishbud.ui.main_ui.home.HomeFragment
 import com.project.fishbud.ui.main_ui.marketplace.MarketplaceFragment
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var user: FirebaseUser
+    private var user: FirebaseUser? = null
     private val TAG = "check"
     private lateinit var searchQueryFromInfoScan: String
     private lateinit var sharedPreferences: SharedPreferences
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
         getFromDatabase()
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
-        user = auth.currentUser as FirebaseUser
+        user = auth.currentUser
         binding.bottomNavigationView.background = null
         binding.bottomNavigationView.menu.getItem(2).isEnabled = false
         auth = FirebaseAuth.getInstance()
@@ -58,11 +59,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
         val community = CommunityFragment()
         val profile = ProfileFragment()
 
-        if (searchQueryFromInfoScan=="null") {
+        if (searchQueryFromInfoScan == "null") {
             makeCurrentFragment(home)
         } else {
             val bundle = Bundle()
-            bundle.putString(Constants.DATA_SEARCH_FROM_MAIN_TO_MARKETPLACE, searchQueryFromInfoScan)
+            bundle.putString(
+                Constants.DATA_SEARCH_FROM_MAIN_TO_MARKETPLACE,
+                searchQueryFromInfoScan
+            )
             marketplace.arguments = bundle
             binding.bottomNavigationView.selectedItemId = R.id.bnv_marketplace
             makeCurrentFragment(marketplace)
@@ -83,7 +87,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
                 }
 
                 R.id.bnv_profile -> {
-                    makeCurrentFragment(profile)
+                    if (user != null) {
+                        makeCurrentFragment(profile)
+                    } else {
+                        startActivity(Intent(this, AuthenticationActivity::class.java))
+                    }
                 }
             }
             true
@@ -92,11 +100,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
 
     }
 
+    override fun onResume() {
+        binding.bottomNavigationView.selectedItemId = R.id.bnv_home
+        super.onResume()
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
 
             R.id.detection -> {
-                startActivity(Intent(this, RecognitionActivity::class.java))
+                if (user != null) {
+                    startActivity(Intent(this, RecognitionActivity::class.java))
+                } else {
+                    startActivity(Intent(this, AuthenticationActivity::class.java))
+                }
             }
         }
     }
@@ -143,10 +160,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
             // Simulate process in background thread
             try {
                 auth = FirebaseAuth.getInstance()
-                user = auth.currentUser as FirebaseUser
-                val reference = FirebaseDatabase.getInstance().reference.child("Users")
-                    .child(user.uid)
-                reference.addValueEventListener(object : ValueEventListener {
+                user = auth.currentUser
+                val reference = user?.uid?.let {
+                    FirebaseDatabase.getInstance().reference.child("Users")
+                        .child(it)
+                }
+                reference?.addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val value = snapshot.getValue(DataProfileEntity::class.java)
                         if (value != null) {

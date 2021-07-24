@@ -64,6 +64,19 @@
                 app:layout_constraintStart_toEndOf="@id/civ_user"
                 app:layout_constraintTop_toBottomOf="@+id/iv_header" />
 
+            <TextView
+                android:id="@+id/dateTime"
+                android:fontFamily="@font/poppins"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/main_margin"
+                android:paddingEnd="@dimen/main_margin"
+                android:text="@string/dateTime"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/civ_user"
+                app:layout_constraintTop_toBottomOf="@+id/user_name_thread" />
+
             <kr.co.prnd.readmore.ReadMoreTextView
                 android:id="@+id/desc_thread"
                 style="@style/formatFont"
@@ -75,7 +88,7 @@
                 android:text="@string/desc_thread"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/user_name_thread"
+                app:layout_constraintTop_toBottomOf="@id/dateTime"
                 app:readMoreColor="@color/read_more_text"
                 app:readMoreMaxLine="4"
                 app:readMoreText="…read more" />

@@ -74,8 +74,6 @@ object DataFirebase {
     }
 
     fun getDataIkan(): LiveData<MutableList<IkanEntity>> {
-        auth = FirebaseAuth.getInstance()
-        user = auth.currentUser as FirebaseUser
 //        Log.i("cek_error", "masuk getDataUser: ")
         val mutableData = MutableLiveData<MutableList<IkanEntity>>()
         val data = mutableListOf<IkanEntity>()
@@ -86,7 +84,7 @@ object DataFirebase {
             // Simulate process in background thread
             try {
                 val reference = FirebaseDatabase.getInstance().reference.child("ListProduk")
-                Log.i("cek_data", "user.uid: ${user.uid}")
+//                Log.i("cek_data", "user.uid: ${user.uid}")
                 reference.addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         data.clear()
@@ -166,8 +164,6 @@ object DataFirebase {
     }
 
     fun getDataThread(): LiveData<MutableList<CommunityEntity>> {
-        auth = FirebaseAuth.getInstance()
-        user = auth.currentUser as FirebaseUser
         val mutableData = MutableLiveData<MutableList<CommunityEntity>>()
         val data = mutableListOf<CommunityEntity>()
 

@@ -9,5 +9,6 @@ data class CommunityEntity(
     var writerName : String = "",
     var threadId : String = "",
     var threadDesc : String = "",
-    var urlProfileImage : String = ""
+    var urlProfileImage : String = "",
+    var dateTime : String = ""
 ) : Parcelable

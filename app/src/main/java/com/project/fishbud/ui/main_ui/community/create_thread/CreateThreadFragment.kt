@@ -16,6 +16,8 @@ import com.project.fishbud.Constants
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentCreateThreadBinding
 import com.project.fishbud.ui.main_ui.community.CommunityEntity
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CreateThreadFragment : Fragment(), View.OnClickListener {
 
@@ -80,12 +82,19 @@ class CreateThreadFragment : Fragment(), View.OnClickListener {
         val reference = FirebaseDatabase.getInstance().reference.child("Thread")
             .child(idThread)
 
+        //get current date and time
+        val cal = Calendar.getInstance()
+        val dt = cal.time
+        val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.US)
+        val timeDate = sdf.format(dt)
+
         val value = CommunityEntity(
             user.uid,
             nameUser,
             idThread,
             binding.descCreateThread.text.toString(),
-            urlImage
+            urlImage,
+            timeDate
         )
 
         reference.setValue(value).addOnCompleteListener {

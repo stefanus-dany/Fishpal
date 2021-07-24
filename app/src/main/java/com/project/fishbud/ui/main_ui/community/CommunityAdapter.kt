@@ -49,6 +49,7 @@ class CommunityAdapter(val mContext: Context) :
         fun bind(data: CommunityEntity) {
             with(binding) {
                 userNameThread.text = data.writerName
+                dateTime.text = data.dateTime
                 Glide.with(mContext)
                     .load(data.urlProfileImage)
                     .into(civUser)
