@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentCommunityBinding
+import com.project.fishbud.ui.main_ui.MainActivity
 import com.project.fishbud.ui.main_ui.community.create_thread.CreateThreadFragment
 
-class CommunityFragment : Fragment(), View.OnClickListener {
+class CommunityFragment : Fragment(), View.OnClickListener{
 
     private lateinit var binding: FragmentCommunityBinding
     private lateinit var viewModel: CommunityViewModel
@@ -46,6 +49,7 @@ class CommunityFragment : Fragment(), View.OnClickListener {
         viewModel.getDataThread().observe(viewLifecycleOwner) {
             with(adapter) {
                 Log.i("cekIkan", "it : $it")
+                binding.progressBar.visibility = View.GONE
                 setdataThread(it)
                 notifyDataSetChanged()
             }
@@ -66,6 +70,22 @@ class CommunityFragment : Fragment(), View.OnClickListener {
             replace(R.id.fl_main_ui, fragment)
             addToBackStack(null)
             commit()
+            val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+            navBar?.visibility = View.GONE
+            val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+            scan?.visibility = View.GONE
         }
     }
+
+    override fun onResume() {
+        val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+        navBar?.visibility = View.VISIBLE
+        val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+        scan?.visibility = View.VISIBLE
+        super.onResume()
+    }
+
+//    override fun onBackPressed(): Boolean {
+//        return false
+//    }
 }

@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.project.fishbud.Constants
@@ -80,6 +82,10 @@ class AkunPembeliFragment : Fragment(), View.OnClickListener {
             replace(R.id.fl_main_ui, fragment)
             addToBackStack(null)
             commit()
+            val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+            navBar?.visibility = View.GONE
+            val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+            scan?.visibility = View.GONE
         }
     }
 
@@ -113,5 +119,12 @@ class AkunPembeliFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    override fun onResume() {
+        val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+        navBar?.visibility = View.VISIBLE
+        val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+        scan?.visibility = View.VISIBLE
+        super.onResume()
+    }
 
 }

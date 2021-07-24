@@ -37,11 +37,11 @@ class PaymentViewModel : ViewModel() {
         kartuKredit: String,
         jenisPengiriman: String,
         totalHarga: Long,
-        netPrice : Long,
+        netPrice: Long,
         timeDate: String,
         date: String,
         dataIkan: ArrayList<IkanEntity>?,
-        ikanQuantity : HashMap<Int, Long>
+        ikanQuantity: HashMap<Int, Long>
     ) {
         val user = FirebaseAuth.getInstance().currentUser as FirebaseUser
         val reference =
@@ -60,12 +60,13 @@ class PaymentViewModel : ViewModel() {
             timeDate,
             date
         )
-        reference.setValue(value).addOnCompleteListener { it ->
+        reference.setValue(value).addOnCompleteListener {
             if (it.isSuccessful) {
-                for (i in 0 until (dataIkan!!.size)){
+                for (i in 0 until (dataIkan!!.size)) {
                     val data = dataIkan[i]
                     //harga per item
                     val hargaQuantity = ikanQuantity[i]
+                    Log.i("teg", "cekHargaQuantity: $hargaQuantity")
                     //${tmp.userId} ${tmp.idProduk} ${tmp.namaIkan} ${tmp.tokoIkan} ${tmp.linkImage} ${tmp.harga}
                     val idProduk = data.idProduk
                     val nelayanId = data.userId
@@ -73,30 +74,34 @@ class PaymentViewModel : ViewModel() {
                     val tokoIkan = data.tokoIkan
                     val linkImage = data.linkImage
 
-                    val reference2 =
-                        FirebaseDatabase.getInstance().reference.child("Users").child(buyerId)
-                            .child("waitingPayment")
-                            .child(idPembayaran)
-                            .child("itemOrdered")
-                            .child(idProduk)
-                    val value2 = OrderFishermanEntity(
-                        nelayanId,
-                        idProduk,
-                        namaIkan,
-                        hargaQuantity!!, //harga peritem
-                        totalHarga,
-                        linkImage,
-                        tokoIkan,
-                        idPembayaran,
-                        user.uid
-                    )
-                    Log.i("cekbuyer", "user.uid payment : ${user.uid}")
-                    reference2.setValue(value2).addOnCompleteListener { er ->
-                        if (er.isSuccessful) {
+                    val cekValue = hargaQuantity.toString()
+                    if (cekValue != "0") {
 
-                        } else {
-                            Toast.makeText(mContext, "Error from database", Toast.LENGTH_SHORT)
-                                .show()
+                        val reference2 =
+                            FirebaseDatabase.getInstance().reference.child("Users").child(buyerId)
+                                .child("waitingPayment")
+                                .child(idPembayaran)
+                                .child("itemOrdered")
+                                .child(idProduk)
+                        val value2 = OrderFishermanEntity(
+                            nelayanId,
+                            idProduk,
+                            namaIkan,
+                            hargaQuantity!!, //harga peritem
+                            totalHarga,
+                            linkImage,
+                            tokoIkan,
+                            idPembayaran,
+                            user.uid
+                        )
+                        Log.i("cekbuyer", "user.uid payment : ${user.uid}")
+                        reference2.setValue(value2).addOnCompleteListener { er ->
+                            if (er.isSuccessful) {
+
+                            } else {
+                                Toast.makeText(mContext, "Error from database", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
                         }
                     }
                 }

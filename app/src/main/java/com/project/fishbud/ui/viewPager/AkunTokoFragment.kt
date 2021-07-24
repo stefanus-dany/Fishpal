@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
@@ -56,6 +58,10 @@ class AkunTokoFragment : Fragment(), View.OnClickListener {
             replace(R.id.fl_main_ui, fragment)
             addToBackStack(null)
             commit()
+            val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+            navBar?.visibility = View.GONE
+            val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+            scan?.visibility = View.GONE
         }
     }
 
@@ -131,4 +137,23 @@ class AkunTokoFragment : Fragment(), View.OnClickListener {
             }
         }
     }
+
+    override fun onResume() {
+        val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+        navBar?.visibility = View.VISIBLE
+        val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+        scan?.visibility = View.VISIBLE
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.i("cekLife", "onPause: ")
+        val sp = activity?.getSharedPreferences("sharedPref2", Context.MODE_PRIVATE)
+        sp?.edit()?.apply {
+            putInt(Constants.SAVE_CURRENT_TABLAYOUT, 1)
+            apply()
+        }
+        super.onPause()
+    }
+
 }

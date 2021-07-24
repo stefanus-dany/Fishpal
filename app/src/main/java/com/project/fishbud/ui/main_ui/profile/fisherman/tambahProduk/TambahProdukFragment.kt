@@ -12,12 +12,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.project.fishbud.R
 import com.project.fishbud.databinding.FragmentTambahProdukBinding
 import java.util.concurrent.Executors
 
-class TambahProdukFragment : Fragment(), View.OnClickListener {
+class TambahProdukFragment : Fragment(), View.OnClickListener, TambahProdukViewModel.goBack {
 
     private lateinit var binding: FragmentTambahProdukBinding
     private lateinit var viewModel: TambahProdukViewModel
@@ -41,6 +44,7 @@ class TambahProdukFragment : Fragment(), View.OnClickListener {
             ViewModelProvider.NewInstanceFactory()
         )[TambahProdukViewModel::class.java]
         viewModel.mContext = requireContext()
+        viewModel.mCallback = this
         binding.ivTambahProduk.setOnClickListener(this)
         binding.btnTambahProduk.setOnClickListener(this)
         binding.btnBack.setOnClickListener {
@@ -86,39 +90,51 @@ class TambahProdukFragment : Fragment(), View.OnClickListener {
                     return onClick(view)
                 }
 
-                viewModel.getDataUser().observe(viewLifecycleOwner, {
-                    count++
-                    Log.i("cek_count", "count tambahprodukfragment: $count")
-                    namaUser = it[0].name
-                    userId = it[0].id
+                val observe = viewModel.getDataUser()
+                observe.observeOnce(this, {
+                    if (it.isNotEmpty()) {
+                        count++
+                        Log.i("cek_count", "count tambahprodukfragment: $count")
+                        namaUser = it[0].name
+                        userId = it[0].id
 
-                    //store data to database
-                    val executor = Executors.newSingleThreadExecutor()
-                    val handler = Handler(Looper.getMainLooper())
-                    executor.execute {
-                        // Simulate process in background thread
-                        try {
-                            viewModel.uploadPicture(
-                                namaUser,
-                                binding.etNamaIkan.text.toString().trim(),
-                                binding.etHargaIkan.text.toString().trim().toInt(),
-                                uriImage!!,
-                                userId
-                            )
-                        } catch (e: InterruptedException) {
-                            e.printStackTrace()
-                        }
-                        handler.post {
-                            // Update ui in main thread
-                            fragmentManager?.popBackStack()
-                            binding.progressBar.visibility = View.GONE
+                        //store data to database
+                        val executor = Executors.newSingleThreadExecutor()
+                        val handler = Handler(Looper.getMainLooper())
+                        executor.execute {
+                            // Simulate process in background thread
+                            try {
+                                viewModel.uploadPicture(
+                                    namaUser,
+                                    binding.etNamaIkan.text.toString().trim(),
+                                    binding.etHargaIkan.text.toString().trim().toInt(),
+                                    uriImage!!,
+                                    userId
+                                )
+                            } catch (e: InterruptedException) {
+                                e.printStackTrace()
+                            }
+                            handler.post {
+                                // Update ui in main thread
+
+                            }
                         }
                     }
-
-
+                    else {
+                        Toast.makeText(context, "Error tambah produk!", Toast.LENGTH_SHORT).show()
+                    }
                 })
             }
         }
+    }
+
+    fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+        observe(lifecycleOwner, object : Observer<T> {
+            override fun onChanged(t: T?) {
+                observer.onChanged(t)
+                removeObserver(this)
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -127,6 +143,13 @@ class TambahProdukFragment : Fragment(), View.OnClickListener {
         if (uriImage !== null) {
             binding.ivTambahProduk.scaleType = ImageView.ScaleType.FIT_XY
             binding.ivTambahProduk.setImageURI(uriImage)
+        }
+    }
+
+    override fun buttonBack(data: Boolean) {
+        if (data){
+            fragmentManager?.popBackStack()
+            binding.progressBar.visibility = View.GONE
         }
     }
 

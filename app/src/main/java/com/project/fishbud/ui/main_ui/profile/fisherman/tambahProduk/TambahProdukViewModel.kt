@@ -17,10 +17,11 @@ import com.project.fishbud.model.UserModel
 import com.project.fishbud.utils.DataFirebase
 import java.util.concurrent.Executors
 
-class TambahProdukViewModel : ViewModel() {
+class TambahProdukViewModel() : ViewModel(){
 
     private lateinit var storage: FirebaseStorage
     private lateinit var storageReference: StorageReference
+    var mCallback : goBack? = null
 
     @SuppressLint("StaticFieldLeak")
     lateinit var mContext: Context
@@ -114,7 +115,8 @@ class TambahProdukViewModel : ViewModel() {
                                     "Produk telah ditambahkan!",
                                     Toast.LENGTH_SHORT
                                 ).show()
-//                                    check = true
+                                mCallback?.buttonBack(true)
+
                             } else {
                                 Toast.makeText(
                                     mContext,
@@ -143,4 +145,9 @@ class TambahProdukViewModel : ViewModel() {
         }
 
     }
+
+    interface goBack{
+        fun buttonBack(data : Boolean)
+    }
+
 }

@@ -118,23 +118,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
         Log.i(TAG, "onStart: ")
     }
 
-    override fun onBackPressed() {
-        if (binding.bottomNavigationView.selectedItemId == R.id.bnv_home) {
-            super.onBackPressed()
-        } else {
-            val fragment =
-                this.supportFragmentManager.findFragmentById(R.id.fl_main_ui)
-            (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
-                Log.i("cekcek", "onBackPressed: ")
-                makeCurrentFragment(HomeFragment(this))
-                binding.bottomNavigationView.selectedItemId = R.id.bnv_home
-            }
-        }
-    }
-
-    interface IOnBackPressed {
-        fun onBackPressed(): Boolean
-    }
+//    override fun onBackPressed() {
+//        if (binding.bottomNavigationView.selectedItemId == R.id.bnv_home) {
+//            super.onBackPressed()
+//        } else {
+//            val fragment =
+//                this.supportFragmentManager.findFragmentById(R.id.fl_main_ui)
+//            (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+//                Log.i("cekcek", "onBackPressed: ")
+//                makeCurrentFragment(HomeFragment(this))
+//                binding.bottomNavigationView.selectedItemId = R.id.bnv_home
+//            }
+//        }
+//    }
+//
+//    interface IOnBackPressed {
+//        fun onBackPressed(): Boolean
+//    }
 
     private fun getFromDatabase() {
         val executor = Executors.newSingleThreadExecutor()

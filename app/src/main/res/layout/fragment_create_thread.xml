@@ -27,18 +27,18 @@
 
                 <ImageView
                     android:id="@+id/btn_back"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/ic_baseline_close_24"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:layout_marginEnd="15dp"
                     android:id="@+id/textView3"
                     style="@style/formatFont.semibold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/main_margin"
                     android:text="@string/buat_utasan"
                     android:textSize="@dimen/main_fontSize"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +53,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/bagikan"
-                    android:layout_marginEnd="@dimen/indent_margin"
+                    android:textSize="@dimen/main_fontSize"
+                    android:layout_marginEnd="@dimen/main_margin"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

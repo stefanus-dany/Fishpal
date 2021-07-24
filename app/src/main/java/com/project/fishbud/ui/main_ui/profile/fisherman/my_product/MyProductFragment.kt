@@ -8,17 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.project.fishbud.Constants
-import com.project.fishbud.OnItemClick
 import com.project.fishbud.R
-import com.project.fishbud.databinding.FragmentMarketplaceNewBinding
 import com.project.fishbud.databinding.FragmentMyProductBinding
-import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
-import com.project.fishbud.ui.main_ui.marketplace.cart.CartFragment
 import com.project.fishbud.ui.main_ui.profile.fisherman.tambahProduk.TambahProdukFragment
 
 
-class MyProductFragment : Fragment(), View.OnClickListener{
+class MyProductFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentMyProductBinding
     private lateinit var viewModel: MyProductViewModel
@@ -62,15 +57,20 @@ class MyProductFragment : Fragment(), View.OnClickListener{
     private fun observeData() {
         viewModel.getMyProduct().observe(viewLifecycleOwner) {
             with(adapter) {
-                Log.i("cekIkan", "it : $it")
-                setdataIkan(it)
-                notifyDataSetChanged()
+                binding.progressBar.visibility = View.GONE
+                if (it.isNotEmpty()) {
+                    Log.i("cekIkan", "it : $it")
+                    setdataIkan(it)
+                    notifyDataSetChanged()
+                } else {
+                    binding.halamanKosong.visibility = View.VISIBLE
+                }
             }
         }
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.btn_add_product -> {
                 val tambahProdukFragment = TambahProdukFragment()
                 makeCurrentFragment(tambahProdukFragment)

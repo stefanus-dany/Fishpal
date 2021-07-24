@@ -47,27 +47,33 @@ class NewOrderFragment : Fragment(), NewOrderAdapter.dataNewOrder {
     }
 
     private fun observeData() {
-        viewModel.getIdOrderedFromFisherman().observe(viewLifecycleOwner){
-            adapter.notifyDataSetChanged()
-            viewModel.getItemOrderedFromFisherman(it).observe(viewLifecycleOwner){
-                with(adapter) {
-                    if (it != null) {
-                        setdataPembayaran(it)
-                        notifyDataSetChanged()
-                    } else {
-                        with(binding) {
-                            rvNewOrder.visibility = android.view.View.GONE
-                            halamanKosong.visibility = android.view.View.VISIBLE
+        viewModel.getIdOrderedFromFisherman().observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                viewModel.getItemOrderedFromFisherman(it).observe(viewLifecycleOwner) {
+                    with(adapter) {
+                        binding.progressBar.visibility = View.GONE
+                        if (it.isNotEmpty()) {
+                            setdataPembayaran(it)
+                            notifyDataSetChanged()
+                        } else {
+                            with(binding) {
+                                rvNewOrder.visibility = View.GONE
+                                halamanKosong.visibility = View.VISIBLE
+                            }
                         }
                     }
                 }
+            } else {
+                binding.progressBar.visibility = View.GONE
+                binding.halamanKosong.visibility = View.VISIBLE
             }
         }
 
     }
 
-    override fun getDataNewOrder(data: OrderFishermanEntity, position: Int) {
+    override fun getDataNewOrder(data: OrderFishermanEntity, position: Int, getItemCount: Int) {
         with(data) {
+            Log.i("nof", "getItemCount: $getItemCount")
             val nelayanId: String = nelayanId
             val idProduk: String = data.idPesanan //id produk
             val namaIkan: String = namaIkan
@@ -75,8 +81,8 @@ class NewOrderFragment : Fragment(), NewOrderAdapter.dataNewOrder {
             val linkImage: String = linkImage
             val tokoIkan: String = tokoIkan
             val idPembayaran: String = idPembayaran
-            val idBuyer : String = idBuyer
-            val totalHarga : Long = totalHarga
+            val idBuyer: String = idBuyer
+            val totalHarga: Long = totalHarga
             Log.i("cekBuyer", "idBuyer di neworder: $idBuyer")
 
             viewModel.storeToDatabase(
@@ -90,7 +96,10 @@ class NewOrderFragment : Fragment(), NewOrderAdapter.dataNewOrder {
                 idPembayaran,
                 idBuyer
             )
-            adapter.notifyItemRemoved(position)
+            if (getItemCount==1){
+                binding.rvNewOrder.visibility = View.GONE
+                binding.halamanKosong.visibility = View.GONE
+            }
         }
     }
 }

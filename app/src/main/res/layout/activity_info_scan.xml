@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.recognition.InfoScanActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/indent_margin"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:layout_width="500dp"
         android:layout_height="wrap_content"

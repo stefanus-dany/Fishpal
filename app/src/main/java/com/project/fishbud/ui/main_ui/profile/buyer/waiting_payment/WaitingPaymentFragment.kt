@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.fishbud.databinding.FragmentWaitingPaymentBinding
@@ -13,7 +16,6 @@ import com.project.fishbud.databinding.FragmentWaitingPaymentBinding
 class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPayment {
 
     private lateinit var binding: FragmentWaitingPaymentBinding
-    private var getData: WaitingPaymentEntity? = null
     private lateinit var viewModel: WaitingPaymentViewModel
     private lateinit var adapter: WaitingPaymentAdapter
 
@@ -44,23 +46,44 @@ class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPaym
         }
     }
 
-    private fun observeData() {
-        viewModel.getDataPayment().observe(viewLifecycleOwner) {
-            with(adapter) {
-                if (it != null) {
-                    setdataPembayaran(it)
-                    notifyDataSetChanged()
-                } else {
-                    with(binding) {
-                        rvWaitingPayment.visibility = View.GONE
-                        halamanKosong.visibility = View.VISIBLE
-                    }
-                }
+    //observe once / observe sekali / observe satu kali
+    fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+        observe(lifecycleOwner, object : Observer<T> {
+            override fun onChanged(t: T?) {
+                observer.onChanged(t)
+                removeObserver(this)
             }
-        }
+        })
     }
 
-    override fun getData(data: WaitingPaymentEntity, position : Int) {
+    //cara panggil observe one
+//    val observe = viewModel.getDataPayment()
+//    observe.observeOnce(this, {
+//        if (it != null) {
+//            with(adapter) {
+//                i++
+//                setdataPembayaran(it)
+//                Log.i("cekObserve", "onChanged: $i")
+//                adapter.notifyDataSetChanged()
+//            }
+//        }
+//    })
+
+    private fun observeData() {
+        viewModel.getDataPayment().observe(viewLifecycleOwner, {
+            binding.progressBar.visibility = View.GONE
+            if (it.isNotEmpty()) {
+                with(adapter) {
+                    setdataPembayaran(it)
+                    adapter.notifyDataSetChanged()
+                }
+            } else {
+                binding.halamanKosong.visibility = View.VISIBLE
+            }
+        })
+    }
+
+    override fun getData(data: WaitingPaymentEntity, position: Int, getItemCount: Int) {
         with(data) {
             val idPembayaran: String = idPembayaran
             val buyerName: String = buyerName
@@ -73,9 +96,9 @@ class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPaym
             Log.i("totharga", "totalharga: $totalHarga")
             val timePurchase: String = date
             val payBefore: String = timeDate
-            val dataIkan : String = dataIkan
+            val dataIkan: String = dataIkan
 
-            viewModel.getItemOrdered(idPembayaran).observe(viewLifecycleOwner){
+            viewModel.getItemOrdered(idPembayaran).observe(viewLifecycleOwner) {
 
                 viewModel.storeToDatabase(
                     idPembayaran,
@@ -92,8 +115,11 @@ class WaitingPaymentFragment : Fragment(), WaitingPaymentAdapter.dataWaitingPaym
                     it
                 )
 
+                if (getItemCount==1){
+                    binding.rvWaitingPayment.visibility = View.GONE
+                    binding.halamanKosong.visibility = View.GONE
+                }
             }
-            adapter.notifyItemRemoved(position)
         }
     }
 }

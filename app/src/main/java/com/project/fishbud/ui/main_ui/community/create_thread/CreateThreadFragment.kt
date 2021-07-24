@@ -63,13 +63,20 @@ class CreateThreadFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.share -> {
+                binding.progressBar.visibility = View.VISIBLE
+                if (binding.descCreateThread.text.toString().trim().isEmpty()) {
+                    binding.descCreateThread.error = "Tuliskan utasan Anda!"
+                    binding.descCreateThread.requestFocus()
+                    binding.progressBar.visibility = View.INVISIBLE
+                    return onClick(view)
+                }
+
                 storeToDatabase()
             }
         }
     }
 
     private fun storeToDatabase() {
-        binding.progressBar.visibility = View.VISIBLE
         val reference = FirebaseDatabase.getInstance().reference.child("Thread")
             .child(idThread)
 

@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.project.fishbud.Constants
 import com.project.fishbud.R
@@ -17,8 +20,6 @@ import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class PaymentFragment : Fragment(), View.OnClickListener {
 
@@ -144,35 +145,43 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                 alphabet = ('a'..'z') + ('A'..'Z') + ('0'..'9')
                 idPembayaran = List(20) { alphabet.random() }.joinToString("")
 
-                viewModel.getDataUser().observe(viewLifecycleOwner, {
-                    count++
-                    Log.i("cek_count", "cek count: $count")
-                    buyerName = it[0].name
-                    buyerId = it[0].id
-                    //store data to database
-                    viewModel.storeToDatabase(
-                        idPembayaran,
-                        buyerName,
-                        buyerId,
-                        binding.etAddress.text.toString().trim(),
-                        binding.etPayment.text.toString().trim(),
-                        jenisPengiriman,
-                        totalPrice,
-                        cartPrice,
-                        timeDate,
-                        date,
-                        dataIkan,
-                        ikanQuantity
-                    )
-
-
-                    startActivity(Intent(activity, MainActivity::class.java))
-                    activity?.finish()
-                    binding.progressBar.visibility = View.GONE
-
+                val observe = viewModel.getDataUser()
+                observe.observeOnce(this, {
+                    if (it.isNotEmpty()) {
+                        count++
+                        Log.i("cek_count", "cek count: $count")
+                        buyerName = it[0].name
+                        buyerId = it[0].id
+                        //store data to database
+                        viewModel.storeToDatabase(
+                            idPembayaran,
+                            buyerName,
+                            buyerId,
+                            binding.etAddress.text.toString().trim(),
+                            binding.etPayment.text.toString().trim(),
+                            jenisPengiriman,
+                            totalPrice,
+                            cartPrice,
+                            timeDate,
+                            date,
+                            dataIkan,
+                            ikanQuantity
+                        )
+                        context?.startActivity(Intent(context, MainActivity::class.java))
+                        activity?.finish()
+                        binding.progressBar.visibility = View.GONE
+                    }
                 })
-
             }
         }
+    }
+
+    fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+        observe(lifecycleOwner, object : Observer<T> {
+            override fun onChanged(t: T?) {
+                observer.onChanged(t)
+                removeObserver(this)
+            }
+        })
     }
 }

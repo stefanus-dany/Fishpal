@@ -10,17 +10,22 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.project.fishbud.OnItemClick
 import com.project.fishbud.R
 import com.project.fishbud.databinding.ItemIkanBinding
 import java.text.NumberFormat
 import java.util.*
 import java.util.concurrent.Executors
-import kotlin.collections.ArrayList
 
-class IkanAdapter(mContext: Context, onItemClick: OnItemClick, val dataIkan: MutableList<IkanEntity>) :
+class IkanAdapter(
+    mContext: Context,
+    onItemClick: OnItemClick,
+    val dataIkan: MutableList<IkanEntity>
+) :
     RecyclerView.Adapter<IkanAdapter.CourseViewHolder>() {
-//    private var dataIkan = ArrayList<IkanEntity>()
+    //    private var dataIkan = ArrayList<IkanEntity>()
     private val mCallback = onItemClick
 
 //    init {
@@ -55,7 +60,7 @@ class IkanAdapter(mContext: Context, onItemClick: OnItemClick, val dataIkan: Mut
         val mCallback: OnItemClick
     ) :
         RecyclerView.ViewHolder(binding.root) {
-
+        val user = FirebaseAuth.getInstance().currentUser as FirebaseUser
         private var bgthread: Thread? = null
 
         fun bind(data: IkanEntity) {
@@ -68,37 +73,46 @@ class IkanAdapter(mContext: Context, onItemClick: OnItemClick, val dataIkan: Mut
                     .into(ivIkan)
 
                 addToCart.setOnClickListener {
-                    val dataIkanToCart = IkanEntity(
-                        data.idProduk,
-                        data.namaIkan,
-                        data.harga,
-                        data.tokoIkan,
-                        data.linkImage,
-                        data.userId
-                    )
-                    Log.i("cek_bind", "bind: $dataIkanToCart")
-                    val executor = Executors.newSingleThreadExecutor()
-                    val handler = Handler(Looper.getMainLooper())
-                    executor.execute {
-                        // Simulate process in background thread
-                        try {
-                            addToCart.background =
-                                ContextCompat.getDrawable(mContext, R.drawable.bg_cart_click)
-                            Thread.sleep(500) // in milisecond
-                        } catch (e: InterruptedException) {
-                            e.printStackTrace()
+                    //cek kalo true, ga bisa beli produk sendiri
+                    if (data.userId != user.uid) {
+                        val dataIkanToCart = IkanEntity(
+                            data.idProduk,
+                            data.namaIkan,
+                            data.harga,
+                            data.tokoIkan,
+                            data.linkImage,
+                            data.userId
+                        )
+                        Log.i("cek_bind", "bind: $dataIkanToCart")
+                        val executor = Executors.newSingleThreadExecutor()
+                        val handler = Handler(Looper.getMainLooper())
+                        executor.execute {
+                            // Simulate process in background thread
+                            try {
+                                addToCart.background =
+                                    ContextCompat.getDrawable(mContext, R.drawable.bg_cart_click)
+                                Thread.sleep(500) // in milisecond
+                            } catch (e: InterruptedException) {
+                                e.printStackTrace()
+                            }
+                            handler.post {
+                                // Update ui in main thread
+                                bgthread = Thread()
+                                bgthread?.start()
+                                addToCart.background =
+                                    ContextCompat.getDrawable(mContext, R.drawable.bg_cart)
+                                Toast.makeText(
+                                    mContext,
+                                    "Ditambahkan ke keranjang",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
                         }
-                        handler.post {
-                            // Update ui in main thread
-                            bgthread = Thread()
-                            bgthread?.start()
-                            addToCart.background =
-                                ContextCompat.getDrawable(mContext, R.drawable.bg_cart)
-                            Toast.makeText(mContext, "Ditambahkan ke keranjang", Toast.LENGTH_SHORT)
-                                .show()
-                        }
+                        mCallback.onClick(dataIkanToCart)
+                    } else {
+                        Toast.makeText(mContext, "Tidak bisa beli produk sendiri!", Toast.LENGTH_SHORT).show()
                     }
-                    mCallback.onClick(dataIkanToCart)
 
                 }
             }

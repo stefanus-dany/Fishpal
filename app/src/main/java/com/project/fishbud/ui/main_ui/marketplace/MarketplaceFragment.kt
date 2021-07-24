@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -25,7 +27,7 @@ import java.util.concurrent.Executors
 import kotlin.collections.ArrayList
 
 
-class MarketplaceFragment : Fragment(), OnItemClick, MainActivity.IOnBackPressed {
+class MarketplaceFragment : Fragment(), OnItemClick{
 
     private lateinit var binding: FragmentMarketplaceNewBinding
 
@@ -67,7 +69,8 @@ class MarketplaceFragment : Fragment(), OnItemClick, MainActivity.IOnBackPressed
             val cartFragment = CartFragment()
             //store data ikan to cart
             val bundle = Bundle()
-            val arrayList: ArrayList<IkanEntity> = ArrayList(ikanEntity)
+            val distinct = ikanEntity.distinct()
+            val arrayList: ArrayList<IkanEntity> = ArrayList(distinct)
             bundle.putParcelableArrayList(Constants.DATA_TO_CART_VALUE, arrayList)
             Log.i("cio", "cek dataIkan di marketplace : $arrayList")
             cartFragment.arguments = bundle
@@ -106,6 +109,10 @@ class MarketplaceFragment : Fragment(), OnItemClick, MainActivity.IOnBackPressed
             replace(R.id.fl_main_ui, fragment)
             addToBackStack(null)
             commit()
+            val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+            navBar?.visibility = View.GONE
+            val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+            scan?.visibility = View.GONE
         }
     }
 
@@ -168,11 +175,11 @@ class MarketplaceFragment : Fragment(), OnItemClick, MainActivity.IOnBackPressed
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText!!.isNotEmpty()) {
                     displayData.clear()
-                    val search = newText.toLowerCase(Locale.getDefault())
+                    val search = newText.lowercase(Locale.getDefault())
 
                     data.forEach {
-                        if (it.namaIkan.toLowerCase(Locale.getDefault()).contains(search) ||
-                            it.tokoIkan.toLowerCase(Locale.getDefault()).contains(search)
+                        if (it.namaIkan.lowercase(Locale.getDefault()).contains(search) ||
+                            it.tokoIkan.lowercase(Locale.getDefault()).contains(search)
                         ) {
                             displayData.add(it)
                         }
@@ -202,8 +209,16 @@ class MarketplaceFragment : Fragment(), OnItemClick, MainActivity.IOnBackPressed
         ikanEntity.add(value)
     }
 
-    override fun onBackPressed(): Boolean {
-        return false
+    override fun onResume() {
+        val navBar : BottomAppBar? = activity?.findViewById(R.id.bottomAppBar)
+        navBar?.visibility = View.VISIBLE
+        val scan : FloatingActionButton? = activity?.findViewById(R.id.detection)
+        scan?.visibility = View.VISIBLE
+        super.onResume()
     }
+
+//    override fun onBackPressed(): Boolean {
+//        return false
+//    }
 
 }

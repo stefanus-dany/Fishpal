@@ -1,6 +1,7 @@
 package com.project.fishbud.ui.main_ui.profile.buyer.transaction
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,18 +46,25 @@ class TransactionFragment : Fragment() {
 
     private fun observeData() {
         viewModel.getIdShipping().observe(viewLifecycleOwner) {
-            viewModel.getItemShipping(it).observe(viewLifecycleOwner) {
-                with(adapter) {
-                    if (it != null) {
-                        setdataPembayaran(it)
-                        notifyDataSetChanged()
-                    } else {
-                        with(binding) {
-                            rvTransaction.visibility = View.GONE
-                            halamanKosong.visibility = View.VISIBLE
+            Log.i("tf", "it :$it ")
+            Log.i("tf", "it :${it.isNotEmpty()} ")
+            if (it.isNotEmpty()) {
+                viewModel.getItemShipping(it).observe(viewLifecycleOwner) {
+                    with(adapter) {
+                        binding.progressBar.visibility = View.GONE
+                        if (it.isNotEmpty()) {
+                            setdataPembayaran(it)
+                            notifyDataSetChanged()
+                        } else {
+                            with(binding) {
+                                halamanKosong.visibility = View.VISIBLE
+                            }
                         }
                     }
                 }
+            } else {
+                binding.progressBar.visibility = View.GONE
+                binding.halamanKosong.visibility = View.VISIBLE
             }
         }
     }
