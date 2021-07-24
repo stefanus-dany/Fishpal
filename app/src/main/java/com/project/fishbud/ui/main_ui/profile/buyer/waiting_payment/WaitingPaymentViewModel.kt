@@ -2,6 +2,7 @@ package com.project.fishbud.ui.main_ui.profile.buyer.waiting_payment
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -51,7 +52,7 @@ class WaitingPaymentViewModel : ViewModel() {
         dataIkan: String,
         orderData: MutableList<OrderFishermanEntity>
     ) {
-
+        Log.i("cekBuyer", "buyerId di waiting: $buyerId")
         //store item order to fisherman
         for (i in 0 until (orderData.size)) {
             val data = orderData[i]
@@ -60,6 +61,8 @@ class WaitingPaymentViewModel : ViewModel() {
             val namaIkan = data.namaIkan
             val linkImage = data.linkImage
             val tokoIkan = data.tokoIkan
+            val buyerId = data.idBuyer
+            val hargaPerItem = data.harga
 
             val reference2 =
                 FirebaseDatabase.getInstance().reference.child("Users").child(nelayanId)
@@ -71,10 +74,12 @@ class WaitingPaymentViewModel : ViewModel() {
                 nelayanId,
                 idProduk,
                 namaIkan,
-                netPrice,
+                hargaPerItem,
+                totalHarga,
                 linkImage,
                 tokoIkan,
-                idPembayaran
+                idPembayaran,
+                buyerId
             )
 
             reference2.setValue(value).addOnCompleteListener {

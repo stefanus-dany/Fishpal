@@ -46,6 +46,7 @@ class TransactionAdapter(val mContext: Context) :
             with(binding) {
                 invoice.text = itemView.resources.getString(R.string.invoice, data.idPembayaran)
                 produkName.text = data.namaIkan
+                fromStore.text = itemView.resources.getString(R.string.fromStore, data.tokoIkan)
                 totalPayment.text = itemView.resources.getString(R.string.total_payment, formatRupiah(data.harga))
             }
         }

@@ -68,6 +68,14 @@
                     android:drawablePadding="@dimen/main_margin" />
 
                 <TextView
+                    android:id="@+id/fromStore"
+                    style="@style/formatFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_margin"
+                    android:text="@string/fromStore" />
+
+                <TextView
                     android:id="@+id/total_payment"
                     style="@style/formatFont"
                     android:layout_width="match_parent"

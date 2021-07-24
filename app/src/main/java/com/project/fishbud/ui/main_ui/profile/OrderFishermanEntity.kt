@@ -9,7 +9,9 @@ data class OrderFishermanEntity(
     var idPesanan : String = "",
     var namaIkan : String= "",
     var harga : Long = 0,
+    var totalHarga : Long = 0,
     var linkImage : String = "",
     var tokoIkan : String = "",
-    var idPembayaran : String = ""
+    var idPembayaran : String = "",
+    var idBuyer : String = ""
 ) : Parcelable

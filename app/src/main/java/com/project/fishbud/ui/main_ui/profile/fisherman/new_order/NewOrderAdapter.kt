@@ -58,7 +58,7 @@ class NewOrderAdapter(val mContext: Context, var mCallback: dataNewOrder) :
                 val tmp = (data.harga * 0.05).toLong()
                 adminCost.text = "Biaya Admin (5%) : ${formatRupiah(tmp, 0)}"
                 pendapatan.text =
-                    itemView.resources.getString(R.string.total_new_order, formatRupiah((data.harga - tmp), 0))
+                    itemView.resources.getString(R.string.pendapatan, formatRupiah((data.harga - tmp), 0))
 
                 btnProsesSekarang.setOnClickListener {
                     val value = OrderFishermanEntity(
@@ -66,9 +66,11 @@ class NewOrderAdapter(val mContext: Context, var mCallback: dataNewOrder) :
                         data.idPesanan, //ini idproduk
                         data.namaIkan,
                         data.harga,
+                        data.totalHarga,
                         data.linkImage,
                         data.tokoIkan,
-                        data.idPembayaran
+                        data.idPembayaran,
+                        data.idBuyer
                     )
 
                     mCallback.getDataNewOrder(value, position)

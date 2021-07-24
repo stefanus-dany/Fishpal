@@ -16,6 +16,7 @@ import com.project.fishbud.ui.main_ui.marketplace.checkout.PaymentFragment
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
@@ -23,6 +24,7 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
     private lateinit var binding: FragmentCartBinding
     private lateinit var cartAdapter: CartAdapter
     private var ikanEntity: ArrayList<IkanEntity>? = null
+    private var ikanQuantity = hashMapOf<Int, Long>()
     private var accumulation = mutableMapOf<Int, Long>()
     private var cartPrice : Long = 0
 
@@ -60,6 +62,7 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
                         //isi map dengan nilai 0 agar saat di cart ga ada error jika isi quantity dari 1 langsung ke 3/4/5...
                         for (i in 0 until (data.size)){
                             accumulation[i] = 0
+                            ikanQuantity[i] = 0
                         }
                         setdataCart(data)
                         notifyDataSetChanged()
@@ -83,6 +86,7 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
     }
 
     override fun totalHarga(value: Long, position: Int) {
+        ikanQuantity[position] = value
         accumulation[position] = value
         var tmp = 0L
         for (i in 0 until (accumulation.size)) {
@@ -111,9 +115,9 @@ class CartFragment : Fragment(), CartAdapter.CartHarga, View.OnClickListener {
                     val paymentFragment = PaymentFragment()
                     val bundle = Bundle()
                     bundle.putLong(Constants.CART_PRICE_TO_PAYMENT, cartPrice)
-
                     val arrayList : ArrayList<IkanEntity> = ArrayList(ikanEntity)
                     bundle.putParcelableArrayList(Constants.DATA_TO_PAYMENT, arrayList)
+                    bundle.putSerializable(Constants.DATA_QUANTITY_TO_PAYMENT, ikanQuantity)
                     Log.i("cio", "cek ikanEntity di cart : $ikanEntity")
                     Log.i("cio", "cek dataIkan di cart : $arrayList")
                     paymentFragment.arguments = bundle

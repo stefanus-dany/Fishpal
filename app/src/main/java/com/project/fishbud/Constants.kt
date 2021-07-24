@@ -10,6 +10,7 @@ object Constants {
     const val RESULT_PREDICTION_TEXT = "result_prediction_text"
     const val DATA_TO_CART_VALUE = "data_to_cart_value"
     const val DATA_TO_PAYMENT = "data_to_payment"
+    const val DATA_QUANTITY_TO_PAYMENT = "data_quantity_to_payment"
     const val DATA_TO_CART_FRAGMENT = "data_to_cart_fragment"
     const val CART_PRICE_TO_PAYMENT = "cart_price_to_payment"
     const val SAVE_TOTAL_HARGA = "save_total_harga"

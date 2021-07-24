@@ -61,8 +61,9 @@
     <string name="bayar">Bayar</string>
     <string name="tanggal_dikirim">%s WIB</string>
     <string name="invoice">INV/%s</string>
+    <string name="fromStore">Dibeli dari %s</string>
     <string name="list_order">Ikan Gurame (Toko Ikan Steve)\nIkan Lele (Toko Ikan Bryan)</string>
-    <string name="total_payment">Total Pembayaran\n%s</string>
+    <string name="total_payment">Total Pembayaran di Toko ini\n%s</string>
     <string name="pesanan_baru">Pesanan Baru</string>
     <string name="proses_sekarang">Proses Sekarang</string>
     <string name="pendapatan">Pendapatan Anda %s</string>

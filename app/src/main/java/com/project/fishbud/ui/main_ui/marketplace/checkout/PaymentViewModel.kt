@@ -2,10 +2,13 @@ package com.project.fishbud.ui.main_ui.marketplace.checkout
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.project.fishbud.model.UserModel
 import com.project.fishbud.ui.main_ui.marketplace.IkanEntity
@@ -37,8 +40,10 @@ class PaymentViewModel : ViewModel() {
         netPrice : Long,
         timeDate: String,
         date: String,
-        dataIkan: ArrayList<IkanEntity>?
+        dataIkan: ArrayList<IkanEntity>?,
+        ikanQuantity : HashMap<Int, Long>
     ) {
+        val user = FirebaseAuth.getInstance().currentUser as FirebaseUser
         val reference =
             FirebaseDatabase.getInstance().reference.child("Users").child(buyerId)
                 .child("waitingPayment")
@@ -59,13 +64,14 @@ class PaymentViewModel : ViewModel() {
             if (it.isSuccessful) {
                 for (i in 0 until (dataIkan!!.size)){
                     val data = dataIkan[i]
+                    //harga per item
+                    val hargaQuantity = ikanQuantity[i]
                     //${tmp.userId} ${tmp.idProduk} ${tmp.namaIkan} ${tmp.tokoIkan} ${tmp.linkImage} ${tmp.harga}
                     val idProduk = data.idProduk
                     val nelayanId = data.userId
                     val namaIkan = data.namaIkan
                     val tokoIkan = data.tokoIkan
                     val linkImage = data.linkImage
-                    val harga = data.harga
 
                     val reference2 =
                         FirebaseDatabase.getInstance().reference.child("Users").child(buyerId)
@@ -77,11 +83,14 @@ class PaymentViewModel : ViewModel() {
                         nelayanId,
                         idProduk,
                         namaIkan,
-                        harga,
+                        hargaQuantity!!, //harga peritem
+                        totalHarga,
                         linkImage,
                         tokoIkan,
-                        idPembayaran
+                        idPembayaran,
+                        user.uid
                     )
+                    Log.i("cekbuyer", "user.uid payment : ${user.uid}")
                     reference2.setValue(value2).addOnCompleteListener { er ->
                         if (er.isSuccessful) {
 

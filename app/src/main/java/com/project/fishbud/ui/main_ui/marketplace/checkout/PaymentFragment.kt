@@ -18,6 +18,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class PaymentFragment : Fragment(), View.OnClickListener {
 
@@ -33,6 +34,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
     private var jenisPengiriman = ""
     private var count = 0
     private var dataIkan : ArrayList<IkanEntity>? = null
+    private var ikanQuantity = hashMapOf<Int, Long>()
 
     //implementasi alfabet acak untuk id
     private var alphabet: List<Char> = emptyList()
@@ -67,6 +69,7 @@ class PaymentFragment : Fragment(), View.OnClickListener {
 
         val bundle: Bundle? = arguments
         if (bundle != null) {
+            ikanQuantity = bundle.getSerializable(Constants.DATA_QUANTITY_TO_PAYMENT) as HashMap<Int, Long>
             cartPrice = bundle.getLong(Constants.CART_PRICE_TO_PAYMENT, 0L)
             dataIkan = bundle.getParcelableArrayList(Constants.DATA_TO_PAYMENT)
             Log.i("cio", "cek dataIkan  di payment: $dataIkan")
@@ -158,7 +161,8 @@ class PaymentFragment : Fragment(), View.OnClickListener {
                         cartPrice,
                         timeDate,
                         date,
-                        dataIkan
+                        dataIkan,
+                        ikanQuantity
                     )
 
 

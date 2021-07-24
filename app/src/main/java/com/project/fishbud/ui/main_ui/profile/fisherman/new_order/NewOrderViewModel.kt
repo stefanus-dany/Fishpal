@@ -2,6 +2,7 @@ package com.project.fishbud.ui.main_ui.profile.fisherman.new_order
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -57,13 +58,15 @@ class NewOrderViewModel : ViewModel() {
         idProduk: String,
         namaIkan: String,
         harga: Long,
+        totalHarga : Long,
         linkImage: String,
         tokoIkan: String,
-        idPembayaran: String
+        idPembayaran: String,
+        idBuyer: String
     ) {
-
+        Log.i("cekBuyer", "idBuyer: $idBuyer")
         val reference2 =
-            FirebaseDatabase.getInstance().reference.child("Users").child(nelayanId)
+            FirebaseDatabase.getInstance().reference.child("Users").child(idBuyer)
                 .child("shipping")
                 .child(idPembayaran)
                 .child(idProduk)
@@ -73,11 +76,13 @@ class NewOrderViewModel : ViewModel() {
             idProduk,
             namaIkan,
             harga,
+            totalHarga,
             linkImage,
             tokoIkan,
-            idPembayaran
+            idPembayaran,
+            idBuyer
         )
-
+        Log.i("cekN", "storeToDatabase: ")
         reference2.setValue(value).addOnCompleteListener {
             if (it.isSuccessful) {
 

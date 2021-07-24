@@ -75,15 +75,20 @@ class NewOrderFragment : Fragment(), NewOrderAdapter.dataNewOrder {
             val linkImage: String = linkImage
             val tokoIkan: String = tokoIkan
             val idPembayaran: String = idPembayaran
+            val idBuyer : String = idBuyer
+            val totalHarga : Long = totalHarga
+            Log.i("cekBuyer", "idBuyer di neworder: $idBuyer")
 
             viewModel.storeToDatabase(
                 nelayanId,
                 idProduk,
                 namaIkan,
                 harga,
+                totalHarga,
                 linkImage,
                 tokoIkan,
-                idPembayaran
+                idPembayaran,
+                idBuyer
             )
             adapter.notifyItemRemoved(position)
         }
