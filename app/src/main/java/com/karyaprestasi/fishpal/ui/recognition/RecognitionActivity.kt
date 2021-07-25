@@ -173,8 +173,8 @@ class RecognitionActivity : AppCompatActivity(), View.OnClickListener {
                     val savedUri = Uri.fromFile(photoFile)
                     val msg = "Photo Saved"
 
-                    Toast.makeText(this@RecognitionActivity, "$msg $savedUri", Toast.LENGTH_SHORT)
-                        .show()
+//                    Toast.makeText(this@RecognitionActivity, "$msg $savedUri", Toast.LENGTH_SHORT)
+//                        .show()
 
                     // val imgFile = File("/sdcard/Images/test_image.jpg")
 
@@ -182,11 +182,14 @@ class RecognitionActivity : AppCompatActivity(), View.OnClickListener {
                     val myBitmap: Bitmap?
                     if (photoFile.exists()) {
                         myBitmap = BitmapFactory.decodeFile(photoFile.absolutePath)
+                        uriImage = savedUri
                         //mendapatkan hasil prediksi dari gambar yang telah discan
                         getPrediction(myBitmap)
                         //pindah ke info scan activity dengan intent
                         val move = Intent(this@RecognitionActivity, InfoScanActivity::class.java)
                         move.putExtra(Constants.RESULT_PREDICTION_TEXT, labels[max])
+                        move.putExtra(Constants.URI_RESULT_SCAN, uriImage)
+                        startActivity(move)
                         startActivity(move)
                     }
                 }

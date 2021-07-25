@@ -39,7 +39,9 @@ class InfoScanActivity : AppCompatActivity() {
 //            Log.i("check", "cekSplit: ${split?.get(1)}")
             val move = Intent(this, MainActivity::class.java)
             move.putExtra(Constants.DATA_SEARCH_FROM_INFOSCAN_TO_MAIN, resultPredictionText)
+            move.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(move)
+            finish()
         }
     }
 
