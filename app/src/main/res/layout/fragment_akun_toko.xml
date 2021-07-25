@@ -131,7 +131,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/waiting_payment"
+            android:id="@+id/my_product"
             style="@style/formatFont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

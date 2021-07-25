@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.project.fishbud">
+    package="com.karyaprestasi.fishpal">
     <!-- custom camera -->
     <uses-feature android:name="android.hardware.camera.any" />
 
@@ -14,14 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FishBud">
-        <activity android:name=".ui.recognition.RecognitionActivity"/>
-        <activity android:name=".ui.recognition.InfoScanActivity" />
-        <activity android:name=".ui.main_ui.MainActivity" />
         <activity
-            android:name=".ui.authentication.AuthenticationActivity"
-            android:screenOrientation="fullSensor" />
+            android:name="com.karyaprestasi.fishpal.ui.recognition.RecognitionActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.karyaprestasi.fishpal.ui.recognition.InfoScanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.karyaprestasi.fishpal.ui.main_ui.MainActivity" />
+        <activity
+            android:name="com.karyaprestasi.fishpal.ui.authentication.AuthenticationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.karyaprestasi.fishpal.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "1050883747907",
-    "project_id": "fishbud-65da9",
-    "storage_bucket": "fishbud-65da9.appspot.com"
+    "project_number": "956743103884",
+    "firebase_url": "https://fishpal-74410-default-rtdb.firebaseio.com",
+    "project_id": "fishpal-74410",
+    "storage_bucket": "fishpal-74410.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1050883747907:android:de7dfd00109ccb4d5de4f6",
+        "mobilesdk_app_id": "1:956743103884:android:a3031dd550bd69f8de52a9",
         "android_client_info": {
-          "package_name": "com.project.fishbud"
+          "package_name": "com.karyaprestasi.fishpal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1050883747907-nhvl79e9j70f257l3bg6hbsrb1ai8to9.apps.googleusercontent.com",
+          "client_id": "956743103884-u90j63q26q52neefvgfn3kljc4q7oblm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAIUeUEdwAmKq5SHI545HIhgVOoYQbXGGs"
+          "current_key": "AIzaSyD7e4ydd4I7cM8n5VAFGjx5eJDdf40oDfg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1050883747907-nhvl79e9j70f257l3bg6hbsrb1ai8to9.apps.googleusercontent.com",
+              "client_id": "956743103884-u90j63q26q52neefvgfn3kljc4q7oblm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
