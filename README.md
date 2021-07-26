@@ -1,7 +1,7 @@
 # Fishpal
 Karya Prestasi team launched an android-based application that implemented Machine Learning to detect objects at the sea such as fish, crab, lobster, seaweed, etc. This application helping fishermen by breaking the chain of middleman so they could directly sell the fish to end-costumer. Also Fishpal launched to educating fisherman with information about detail fish (such as age, size, and fish nutrition) and discussion with other through community page.
 
-Before running Fishpal project, you have to download model and labels that used to get image processing data and put it into 
+Before running Fishpal project, you have to update model and labels that used to get image processing data and put it into 
 1. app-assets for labels
 2. app-ml for model.tflite
 
