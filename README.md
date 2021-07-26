@@ -1,0 +1,2 @@
+# Fishpal
+Tim Karya Prestasi menghadirkan ide produk perangkat lunak, Fishpal. Sebuah aplikasi berbasis android untuk membantu nelayan memperoleh penghasilan yang optimal, dengan memutus rantai tengkulak di antara nelayan dan konsumen. Pada aplikasi ini, para nelayan dapat menjual ikan secara langsung kepada end consumer. Selain itu, Fishpal hadir untuk membantu mengedukasi nelayan juga menyediakan layanan antar pengguna agar dapat saling berinteraksi dan bertukar pikiran.
