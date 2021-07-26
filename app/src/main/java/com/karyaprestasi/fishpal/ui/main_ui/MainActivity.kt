@@ -87,11 +87,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, HomeFragment.onC
                 }
 
                 R.id.bnv_profile -> {
-                    if (user != null) {
-                        makeCurrentFragment(profile)
-                    } else {
-                        startActivity(Intent(this, AuthenticationActivity::class.java))
-                    }
+                    makeCurrentFragment(profile)
                 }
             }
             true

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.karyaprestasi.fishpal.databinding.ActivitySplashScreenBinding
 import com.karyaprestasi.fishpal.ui.authentication.AuthenticationActivity
+import com.karyaprestasi.fishpal.ui.main_ui.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class SplashScreenActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
         binding.logo.animate().setDuration(1500).alpha(1f).withEndAction{
-            startActivity(Intent(this, AuthenticationActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }

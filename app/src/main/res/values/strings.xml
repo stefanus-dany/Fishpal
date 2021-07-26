@@ -106,6 +106,7 @@
     <string name="buka_toko_sekarang">Buka Toko Sekarang</string>
     <string name="max_umur">Max Umur</string>
     <string name="cari_di_toko">Cari di Toko</string>
+    <string name="anda_belum_login">Anda belum login</string>
 
     //tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
 
