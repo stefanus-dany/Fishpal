@@ -59,6 +59,7 @@ class InfoScanActivity : AppCompatActivity() {
                     titleInfoscan.text = resultPredictionText
                 }
             }
+            Log.i("testObserveData", "after")
         }
     }
 }

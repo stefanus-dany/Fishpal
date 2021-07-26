@@ -190,7 +190,6 @@ class RecognitionActivity : AppCompatActivity(), View.OnClickListener {
                         move.putExtra(Constants.RESULT_PREDICTION_TEXT, labels[max])
                         move.putExtra(Constants.URI_RESULT_SCAN, uriImage)
                         startActivity(move)
-                        startActivity(move)
                     }
                 }
 
