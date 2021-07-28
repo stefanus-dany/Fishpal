@@ -56,16 +56,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
         binding.rememberMe.isChecked = rememberMe
         binding.loginBtn.setOnClickListener(this)
         binding.registerNow.setOnClickListener(this)
-        binding.skip.setOnClickListener(this)
 
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.skip -> {
-                context?.startActivity(Intent(context, MainActivity::class.java))
-                activity?.finish()
-            }
             R.id.loginBtn -> {
                 binding.progressBar.visibility = View.VISIBLE
 
