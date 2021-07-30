@@ -47,8 +47,11 @@ class InfoScanActivity : AppCompatActivity() {
 
     private fun observeData() {
         resultPredictionText?.let {
+            Log.i("testObserveData", "before")
             viewModel.getDataInfoScan(it).observe(this) {
+                Log.i("testObserveData", "mid")
                 with(binding) {
+                    Log.i("testObserveData", "data: $it")
                     progressBar.visibility = View.GONE
                     Glide.with(this@InfoScanActivity)
                         .load(uriImage)
